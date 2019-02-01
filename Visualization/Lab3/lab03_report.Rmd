@@ -1,0 +1,657 @@
+---
+title: "Lab 03 Report"
+date: "9/19/2018"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 4
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+***
+
+# Group 17
+* Mim Kemal Tekin (mimte666)
+* Hector Plata (hecpl268)
+
+***
+
+# Assignment 1. Visualization of mosquito’s populations
+
+## Task 1.1
+
+**Use MapBox interface in Plotly to create two dot maps (for years 2004 and 2013) that show the distribution of the two types of mosquitos in the world (use color to distinguish between mosquitos). Analyze which countries and which regions in these countries had high density of each mosquito type and how the situation changed between these time points. What perception problems can be found in these plots?**
+
+In 2004 the presence of *Aedes aegypti* is very pronounced arround the world, specially along the ecuator. It can be found in all continents except europe. It's also visible that in the case of Latin America and some parts of Asia the mosquitoes tend to cluster around or near coastal cities. The countries that host the most of this kind of mosquitoes are:
+
+- Mexico
+- Colombia
+- Brazil
+- Venezuela
+- Thailand
+- Taiwan
+
+
+As for *Aedes albopictus* it's present around the globe except for Africa. It also appears to have less population than *Aedes aegypti* and because of that, is difficult to define some geographic characteristic that can be attached to it. One interesting thing about the *Aedes albopictus* mosquito is that is heavily present in Taiwan as well as *Aedes aegypti*. Another interesting thing about this type of mosquito is that is the only one in the United States and it's presence in Europe is limited to Spain, Italy and Croatia.
+
+As for 2013, both populations of mosquitoes seems to be totally erradicated compared to 2004. However there is still a heavy presence of both mosquitoes in Taiwan. Also, looks like the mosquitoes went from the east coast of the Unites States to the west coast.
+
+One of the perceptual problems that this representation holds is the fact that dots can't represent cleary the density of the observations. The fact that there are more points around an area, doesn't mean that there is a bigger presence of mosquitoes than in another region which just a few concentrated points. Another problem rises from the the overlapping of the dots on the graph. If when making the analysis, we didn't hide each class of mosquito, the conclusion on both would be that *Aedes albopictus* is the only species that you can find on Taiwan. This is due to the overlapping of dots, once you hide them, it's cleary that Taiwan have a big prescence of both species.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(plotly)
+library(tidyverse)
+df = read.csv("aegypti_albopictus.csv")
+
+# Transforming the dataframe.
+# Getting the year.
+# Removing the missing values.
+# Getting only data that represents points.
+df_2004 = df[df$YEAR == 2004, ]
+df_2013 = df[df$YEAR == 2013, ]
+
+# Creating both plots (2004, 2013).
+p_2004 = plot_mapbox(lat=df_2004$Y,
+                lon=df_2004$X,
+                mode='scattermapbox',
+                color=df_2004$VECTOR) %>%
+          layout(title='Mosquito’s Population in 2004',
+                   font=list(color='white'),
+                   plot_bgcolor='#191A1A', 
+                   paper_bgcolor='#191A1A',
+                   mapbox=list(style='dark'),
+                   legend=list(orientation='h',
+                                 font=list(size=8)),
+                   margin=list(l=25, r=25,
+                                 b=25, t=25,
+                                 pad=2))
+
+p_2013 = plot_mapbox(lat=df_2013$Y,
+                lon=df_2013$X,
+                mode='scattermapbox',
+                color=df_2013$VECTOR) %>%
+      layout(title='Mosquito’s Population in 2013',
+               font=list(color='white'),
+               plot_bgcolor='#191A1A', 
+               paper_bgcolor='#191A1A',
+               mapbox=list(style='dark'),
+               legend=list(orientation='h',
+                             font=list(size=8)),
+               margin=list(l=25, r=25,
+                             b=25, t=25,
+                             pad=2))
+
+p_2004
+p_2013
+```
+
+
+## Task 1.2
+**Compute Z as the numbers of mosquitos per country detected during all study period. Use plot_geo() to create a choropleth map that shows Z values. This map should have an Equirectangular projection. Why do you think there is so little information in the map?**
+
+There is so little information on this map compared to the one before for various reasons. The first one is that three variables that describe well the population before are now enconded into a single one. In this particular case, those variables are the vector of the mosquitoes, the coordinates (X, Y) of each data point and the time coordinate, these variables are now being encoded into the number of mosquitos variable (Z). 
+
+The apparent loss of information also involves the fact, that it's not fair to compare countries on an absolute value (Number of mosquitos). This is because there are conditions like area, human population and time that affect the scale. For example, in this case Brazil and Taiwan are the countries that holds more mosquitos information of all. The gap between the number of mosquitos per country increases as you sum this variable over time. Making it look like the only countries with mosquitos are brazil and Taiwan.
+
+```{r echo=FALSE}
+# Calculating the number of
+# mosquitoes per country.
+df$view = 1
+df_agg = aggregate(df$view,
+                   by=list(COUNTRY_ID=df$COUNTRY_ID, COUNTRY=df$COUNTRY),
+                   FUN=sum)
+
+# Defining the plot.
+g = list(projection=list(type='equirectangular'))
+
+p = plot_geo() %>%
+     add_trace(z=df_agg$x,
+               color=df_agg$x,
+               colors='Blues',
+               text=df_agg$COUNTRY,
+               locations=df_agg$COUNTRY_ID) %>%
+      layout(title="Number of mosquitoes per country",
+             geo=g) %>%
+      colorbar(title="Number of Mosquitos")
+
+p
+```
+
+
+## Task 1.3
+**Create the same kind of maps as in step 2 but use**
+
+a. *Equidistant projection with choropleth color log(Z)*
+
+b. *Conic equal area projection with choropleth color log(Z)*
+
+**Analyze the map from step 3a and make conclusions. Compare maps from 3a and 3b and comment which advantages and disadvantages you may see with both types of maps.**
+
+The map from 3a shows more information with respect to the plot before. The fact that we are in some way rescaling the variables, gives us a new perspective about the distribution of mosquitos around the globe. However when reading such a plot, it's necesary to remember that the absolute differences between the number of mosquitos per country are much bigger than the ones presented on the plot.
+
+Both maps shows the same information. The principal difference is that the second one maintains the area, which makes it easier to compare the logarithm of the number of mosquitos per country and have a grasp of the density of mosquitoes by this. The main disadvantage that the map from 3b has is that we have a bias to see maps like in 3a. This makes it a little bit harder to locate a country on the map and compare it to another one.
+
+```{r echo=FALSE}
+# Equidistant plot.
+g = list(projection=list(type='equidistant'))
+
+p = plot_geo() %>%
+     add_trace(z=log(df_agg$x),
+               color=log(df_agg$x),
+               colors='Blues',
+               text=df_agg$COUNTRY,
+               locations=df_agg$COUNTRY_ID) %>%
+      layout(title="Log(Number of mosquitoes per country)",
+             geo=g) %>%
+      colorbar(title="Number of Mosquitos")
+
+p
+
+# Conic equal area plot.
+g = list(projection=list(type='conic equal area'))
+
+p = plot_geo() %>%
+     add_trace(z=log(df_agg$x),
+               color=log(df_agg$x),
+               colors='Blues',
+               text=df_agg$COUNTRY,
+               locations=df_agg$COUNTRY_ID) %>%
+      layout(title="Log(Number of mosquitoes per country)",
+             geo=g) %>%
+      colorbar(title="Number of Mosquitos")
+
+p
+```
+
+## Task 1.4
+**In order to resolve the problems detected in step 1, use data from 2013 only for Brazil and:**
+
+a. *Create variable X1 by cutting X into 100 pieces (use cut_interval())*
+
+b. *Create variable Y1 by cutting Y into 100 pieces (use cut_interval())*
+
+c. *Compute mean values of X and Y per groups (X1, Y1) and the amount of observations N per group (X1, Y1)*
+
+d. *Visualize mean X,Y andN by using MapBox.*
+
+**Identify regions in Brazil that are most infected by mosquitoes. Did such discretization help in analyzing the distribution of mosquitoes?**
+
+This new map resembles a map of the population density of Brazil. This means that mosquitos concentrate more along big human population centers. Among those centers are Sao Paulo, Rio de Janeiro, Salvador, Recife and Fortaleza among others. Doing this discretization helped for sure to identify which regions / cities are more affected by mosquitos. This intervals helped remove the clutter of so many data points that can be seen on the first plot from 2013.
+
+```{r echo=FALSE, warning=FALSE}
+# Creating a boolean mask to get
+# the data points that corresponds
+# to Brazil in 2013.
+mask = df$COUNTRY == 'Brazil' & df$YEAR == 2013
+df_br13 = df[mask, ]
+
+# Creating the intervals for the coordinates.
+df_br13$X1 = cut_interval(df_br13$X, 100)
+df_br13$Y1 = cut_interval(df_br13$Y, 100)
+
+# Creating a column of ones so
+# we can group them and count
+# observations among the intervals.
+df_br13$count = 1
+
+# Getting the mean of X1, Y1
+# and sum of N by intervals.
+df_grouped = df_br13 %>%
+    group_by(X1, Y1) %>%
+    summarise(X1_mean=mean(X),
+              Y1_mean=mean(Y),
+              nobs=sum(count))
+
+
+g = list(scope="south america")
+p = plot_mapbox(lat=df_grouped$Y1_mean,
+                lon=df_grouped$X1_mean,
+                mode='scattermapbox',
+                text=df_grouped$nobs,
+                color=df_grouped$nobs) %>%
+          layout(title='Mean Mosquito’s Population in 2013 (Brazil)',
+                 font=list(color='white'),
+                 plot_bgcolor='#191A1A', 
+                 paper_bgcolor='#191A1A',
+                 mapbox=list(style='dark', mapbox=g),
+                 legend=list(orientation='h',
+                             font=list(size=8)),
+                 margin=list(l=25, r=25,
+                             b=25, t=25,
+                             pad=2))
+
+p
+```
+
+***
+
+# Assignment 2. Visualization of income in Swedish households
+
+Analyze the mean incomes of Swedish households.  
+The data that downloaded from http://www.scb.se can be seen in below.
+
+```{r}
+## Load data
+df = read.csv(file="income_households.csv", fileEncoding="ISO-8859-1", sep=",")
+head(df)
+```
+
+## Task 2.1
+Download a relevant map of Swedish counties from http://gadm.org/country and load it into R. Read your data into R and process it in such a way that different age groups are shown in different columns. Let’s call these groups Young, Adult and Senior.
+
+```{r, message=F, warning=F}
+library(dplyr)
+
+## Load map
+rds = readRDS("gadm36_SWE_2_sf.rds")
+
+## Create groups
+grouped_df = df %>%
+  group_by(region) %>%
+  summarise(Young = mean(X2016[age=="18-29 years"]), Adult = mean(X2016[age=="30-49 years"]), Senior = mean(X2016[age=="50-64 years"]))
+
+head(grouped_df)
+```
+
+## Task 2.2
+Create a plot containing three violin plots showing mean income distributions per age group. Analyze this plot and interpret your analysis in terms of income.
+
+```{r, echo=F, message=F, warning=F, fig.align='center', }
+library(ggplot2)
+library(plotly)
+
+violin_plot_age <- df %>%
+  filter(age!="18+ years") %>%
+  droplevels() %>%
+  plot_ly(
+    x = ~age,
+    y = ~X2016,
+    split = ~age,
+    type = 'violin',
+    box = list(
+      visible = T
+    ),
+    meanline = list(
+      visible = T
+    )
+  ) %>% 
+  layout(
+    xaxis = list(
+      title = "Mean Income in Thousands"
+    ),
+    yaxis = list(
+      title = "Age",
+      zeroline = F
+    )
+  )
+ggplotly(violin_plot_age)
+```
+
+### Analysis
+We can see there is a huge difference in mean income of households between young people and the other two (Adult, Senior). When we look the difference of adult and senior people, Seniors generally have a little bit more income than the Adult group. That can be seen on the IQR, since Q1 and Q3 is higher for the seniors than for the adults. Also it has a bigger range. Another thing to consider is that the outliers corresponding to the young generation are not that far away from the mean / median than the ones from the adult and senior population.
+
+## Task 2.3
+Create a surface plot showing dependence of Senior incomes on Adult and Young incomes in various counties. What kind of trend can you see and how can this be interpreted? Do you think that linear regression would be suitable to model this dependence?
+
+```{r, echo=F, message=F, warning=F, fig.align='center'}
+library(ggplot2)
+library(plotly)
+library(akima)
+attach(grouped_df)
+s=interp(Young,Adult,Senior, duplicate = "mean")
+s$Senior = s$z
+detach(grouped_df)
+plot_ly(x=~s$x, y=~s$y, z=~s$Senior, type="surface") %>%
+  layout(
+    scene = list(
+        xaxis = list(
+        title = "Young"
+      ),
+      yaxis = list(
+        title = "Adult"
+      ),
+      zaxis = list(
+        title = "Senior"
+      )
+    )
+  )
+```
+
+### Analysis
+
+All variables (Young, Adult and Senior) have a positive correlation since all of these grow together. Another peculiar aspect of this graph is that there is more variance for low / medium income individuals than for high income individuals. Thus, there seems to be an equal amount of people from low income class and medium income class, while there are less population for high income individuals. 
+
+As for the suggestiong of using a multiple linear regression, it would be a good idea since a linear regression with three coefficients (not taking into account the intercept) is a plane on a 3D space, and since this plot shows a somewhat well defined and smooth plane a linear regression would be a great algorith to use to predict the income of each age class depending on the others. However there might be some endogeneity problems because any of the variables that might be used as a dependent variable is going to be correlated with the error term and thus cause biased estimators. For example, if the senior variable is going to be explained by the adult and young population, the senior variable will be related with the education of both the young and adult population, which if not modeled, will result in endogeneity.
+
+
+## Task 2.4
+Use Plotly and add_sf() function to visualize incomes of Young and Adults in two choropleth maps. 
+```{r, echo=F, message=F, warning=F, fig.align='center'}
+library(sf)
+grouped_df = as.data.frame(grouped_df)
+splitted_region = strsplit(as.character(grouped_df$region) , " ")
+# get all words except first and last
+splitted_region = sapply(splitted_region, FUN=function(el){
+  paste(el[2:(length(el)-1)], collapse=" ")
+})
+# fix the Orebro label
+splitted_region[which(splitted_region=="Örebro")]="Orebro"
+rownames(grouped_df) = splitted_region
+# Set Young means to rds
+rds$Young=grouped_df[rds$NAME_1, "Young"]
+rds$Young[is.na(rds$Young)]=0
+# Set Adult means to rds
+rds$Adult=grouped_df[rds$NAME_1, "Adult"]
+rds$Adult[is.na(rds$Adult)]=0
+
+# young map
+choropleth_map_1 = plot_ly() %>%
+  add_sf(data=rds, split=~NAME_1, color=~Young, showlegend=F, alpha=1) %>%
+  layout(
+    title = "Mean of Young"
+  )
+# adult map
+choropleth_map_2 = plot_ly() %>%
+  add_sf(data=rds, split=~NAME_1, color=~Adult, showlegend=F, alpha=1)%>%
+  layout(
+    title = "Mean of Adult"
+  )
+
+subplot(choropleth_map_1,choropleth_map_2) %>%
+  layout(title = "Mean of Young           |           Mean of Adult")
+# choropleth_map_1
+# choropleth_map_2
+```
+
+### Analysis
+
+In other plots, we are able to analyse and compare mean income of householders by their ages. But this graph provide us to compare them by counties.  
+We can see in the both graph, young and adult people have the highest income in Stockholm. In the graph of young people, observations have really various values when you look in the countie level. When we look the observations of adults, it is more clear to see a regularly increase of mean income when go to South from North. It's also visible that young people are earning more money than their adult counterparts.
+
+## Task 2.5
+Extract the coordinates of Linköping and add it as a red dot to Mean of Young graph in Task 2.4  
+Lat = 58.409814  
+Long = 15.624525
+```{r, echo=F, message=F, warning=F, fig.align='center'}
+li_lat = 58.409814
+li_long = 15.624525
+choropleth_map = choropleth_map_1 %>%
+  add_markers(
+    y = li_lat, x = li_long,
+    size = 5, color = rgb(1,0,0), text = "Linköping"
+  ) 
+
+choropleth_map
+```
+
+***
+
+# Appendix
+
+```{r eval=FALSE}
+# Task 1.1
+library(plotly)
+library(tidyverse)
+df = read.csv("aegypti_albopictus.csv")
+
+# Transforming the dataframe.
+# Getting the year.
+# Removing the missing values.
+# Getting only data that represents points.
+df_2004 = df[df$YEAR == 2004, ]
+df_2013 = df[df$YEAR == 2013, ]
+
+# Creating both plots (2004, 2013).
+p_2004 = plot_mapbox(lat=df_2004$Y,
+                lon=df_2004$X,
+                mode='scattermapbox',
+                color=df_2004$VECTOR) %>%
+          layout(title='Mosquito’s Population in 2004',
+                   font=list(color='white'),
+                   plot_bgcolor='#191A1A', 
+                   paper_bgcolor='#191A1A',
+                   mapbox=list(style='dark'),
+                   legend=list(orientation='h',
+                                 font=list(size=8)),
+                   margin=list(l=25, r=25,
+                                 b=25, t=25,
+                                 pad=2))
+
+p_2013 = plot_mapbox(lat=df_2013$Y,
+                lon=df_2013$X,
+                mode='scattermapbox',
+                color=df_2013$VECTOR) %>%
+      layout(title='Mosquito’s Population in 2013',
+               font=list(color='white'),
+               plot_bgcolor='#191A1A', 
+               paper_bgcolor='#191A1A',
+               mapbox=list(style='dark'),
+               legend=list(orientation='h',
+                             font=list(size=8)),
+               margin=list(l=25, r=25,
+                             b=25, t=25,
+                             pad=2))
+
+p_2004
+p_2013
+
+# Task 1.2 
+# Calculating the number of
+# mosquitoes per country.
+df$view = 1
+df_agg = aggregate(df$view,
+                   by=list(COUNTRY_ID=df$COUNTRY_ID, COUNTRY=df$COUNTRY),
+                   FUN=sum)
+
+# Defining the plot.
+g = list(projection=list(type='equirectangular'))
+
+p = plot_geo() %>%
+     add_trace(z=df_agg$x,
+               color=df_agg$x,
+               colors='Blues',
+               text=df_agg$COUNTRY,
+               locations=df_agg$COUNTRY_ID) %>%
+      layout(title="Number of mosquitoes per country",
+             geo=g) %>%
+      colorbar(title="Number of Mosquitos")
+
+p
+
+# Task 1.3
+# Equidistant plot.
+g = list(projection=list(type='equidistant'))
+
+p = plot_geo() %>%
+     add_trace(z=log(df_agg$x),
+               color=log(df_agg$x),
+               colors='Blues',
+               text=df_agg$COUNTRY,
+               locations=df_agg$COUNTRY_ID) %>%
+      layout(title="Log(Number of mosquitoes per country)",
+             geo=g) %>%
+      colorbar(title="Number of Mosquitos")
+
+p
+
+# Conic equal area plot.
+g = list(projection=list(type='conic equal area'))
+
+p = plot_geo() %>%
+     add_trace(z=log(df_agg$x),
+               color=log(df_agg$x),
+               colors='Blues',
+               text=df_agg$COUNTRY,
+               locations=df_agg$COUNTRY_ID) %>%
+      layout(title="Log(Number of mosquitoes per country)",
+             geo=g) %>%
+      colorbar(title="Number of Mosquitos")
+
+p
+
+# Task 1.4
+# Creating a boolean mask to get
+# the data points that corresponds
+# to Brazil in 2013.
+mask = df$COUNTRY == 'Brazil' & df$YEAR == 2013
+df_br13 = df[mask, ]
+
+# Creating the intervals for the coordinates.
+df_br13$X1 = cut_interval(df_br13$X, 100)
+df_br13$Y1 = cut_interval(df_br13$Y, 100)
+
+# Creating a column of ones so
+# we can group them and count
+# observations among the intervals.
+df_br13$count = 1
+
+# Getting the mean of X1, Y1
+# and sum of N by intervals.
+df_grouped = df_br13 %>%
+    group_by(X1, Y1) %>%
+    summarise(X1_mean=mean(X),
+              Y1_mean=mean(Y),
+              nobs=sum(count))
+
+
+g = list(scope="south america")
+p = plot_mapbox(lat=df_grouped$Y1_mean,
+                lon=df_grouped$X1_mean,
+                mode='scattermapbox',
+                text=df_grouped$nobs,
+                color=df_grouped$nobs) %>%
+          layout(title='Mean Mosquito’s Population in 2013 (Brazil)',
+                 font=list(color='white'),
+                 plot_bgcolor='#191A1A', 
+                 paper_bgcolor='#191A1A',
+                 mapbox=list(style='dark', mapbox=g),
+                 legend=list(orientation='h',
+                             font=list(size=8)),
+                 margin=list(l=25, r=25,
+                             b=25, t=25,
+                             pad=2))
+
+p
+
+library(dplyr)
+library(ggplot2)
+library(sf)
+
+## TASK 2.1
+
+## Load data
+df = read.csv(file="income_households.csv", fileEncoding="ISO-8859-1", sep=",")
+## Load map
+rds = readRDS("gadm36_SWE_2_sf.rds")
+
+## Create 
+grouped_df = df %>%
+  group_by(region) %>%
+  summarise(Young = mean(X2016[age=="18-29 years"]), Adult = mean(X2016[age=="30-49 years"]), Senior = mean(X2016[age=="50-64 years"]))
+
+
+## TASK 2.2
+violin_plot_age <- df %>%
+  filter(age!="18+ years") %>%
+  droplevels() %>%
+  plot_ly(
+    x = ~age,
+    y = ~X2016,
+    split = ~age,
+    type = 'violin',
+    box = list(
+      visible = T
+    ),
+    meanline = list(
+      visible = T
+    )
+  ) %>% 
+  layout(
+    xaxis = list(
+      title = "Mean Income in Thousands"
+    ),
+    yaxis = list(
+      title = "Age",
+      zeroline = F
+    )
+  )
+ggplotly(violin_plot_age)
+
+
+
+## TASK 2.3
+library(akima)
+attach(grouped_df)
+s=interp(Young,Adult,Senior, duplicate = "mean")
+detach(grouped_df)
+plot_ly(x=~s$x, y=~s$y, z=~s$z, type="surface") %>%
+  layout(
+    scene = list(
+      xaxis = list(
+        title = "Young"
+      ),
+      yaxis = list(
+        title = "Adult"
+      ),
+      zaxis = list(
+        title = "Senior"
+      )
+    )
+  )
+
+
+
+
+## TASK 2.4
+# Set rownames of grouped_df as like rds NAME_1 countie names to use same indexing
+# split all regions
+grouped_df = as.data.frame(grouped_df)
+splitted_region = strsplit(as.character(grouped_df$region) , " ")
+# get all words except first and last
+splitted_region = sapply(splitted_region, FUN=function(el){
+  paste(el[2:(length(el)-1)], collapse=" ")
+})
+# fix the Orebro label
+splitted_region[which(splitted_region=="Örebro")]="Orebro"
+rownames(grouped_df) = splitted_region
+# Set Young means to rds
+rds$Young=grouped_df[rds$NAME_1, "Young"]
+rds$Young[is.na(rds$Young)]=0
+# Set Adult means to rds
+rds$Adult=grouped_df[rds$NAME_1, "Adult"]
+rds$Adult[is.na(rds$Adult)]=0
+
+# young map
+choropleth_map_1 = plot_ly() %>%
+  add_sf(data=rds, split=~NAME_1, color=~Young, showlegend=F, alpha=1) %>%
+  layout(
+    title = "Mean of Young"
+  )
+# adult map
+choropleth_map_2 = plot_ly() %>%
+  add_sf(data=rds, split=~NAME_1, color=~Adult, showlegend=F, alpha=1)%>%
+  layout(
+    title = "Mean of Adult"
+  )
+subplot(choropleth_map_1, choropleth_map_2)
+
+
+## TASK 2.5
+# Add Liu Location
+li_lat = 58.409814
+li_long = 15.624525
+choropleth_map = choropleth_map_1 %>%
+  add_markers(
+    y = li_lat, x = li_long,
+    size = 5, color = rgb(1,0,0), text = "Linköping"
+  ) 
+
+choropleth_map
+
+```
+

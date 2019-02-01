@@ -1,0 +1,396 @@
+---
+title: "Lab 01 Report"
+output: html_document
+df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Group 17
+- Mim Kemal Tekin (mimte666)
+- Hector Plata (hecpl268)
+
+# Assignment 1
+Below is presented the svg/pdf resulting from modifying the figure using Inkscape. 
+<img src="tree-edited.svg" alt="test"  width="4200" height="4200">
+
+
+# Assignment 2
+Data set SENIC describes the result of measurements taken at different US hospitals. The description of the variables is given in the accompanying document **SENIC.pdf**.
+
+1. Read data from SENIC.text into R.
+
+The data is loaded and the first 5 rows are showned below.
+```{r echo=FALSE}
+# Importing the data that we are going to use
+# and taking a look at it so that we know it 
+# was imported properly.
+df = read.table("SENIC.txt")
+
+# Changing the names of the columns.
+df_names = c("ID")
+
+for (i in 1:11){
+  df_names = c(df_names, c(paste("X", as.character(i), sep="")))
+}
+
+names(df) = df_names
+head(df)
+```
+
+
+2. Create a function that for a given column (vector) X does the following:
+
+- It computes first and third quantiles Q1 and Q3 with quantiles()
+- It returns indices of outlying observations, i/.e. observation with X-values greater than Q3 + 1.5(Q3 - Q1) or less than Q1 - 15(Q3 - Q1)
+
+Below is declared the function that suffices both requirements.
+
+```{r}
+outliers = function(vec){
+  # Stop condition for the outliers function.
+  if (!(is.vector(vec) & is.numeric(vec))){
+    print("ERROR: Either the object is not a vector or is not numeric.")
+    stop()
+  }
+  
+  # Getting the length of the vector in
+  # order to construct the indices.
+  n = length(vec)
+  idxs = 1:n # Indices.
+  
+  # Getting the quantiles of the vector
+  # to calculate outliers.
+  quantiles = quantile(vec)
+  q1 = quantiles[[2]]  # First quantile.
+  q3 = quantiles[[4]]  # Third quantile.
+  
+  # Constructing the boolean mask that
+  # is going to be used to construct the
+  # indices.
+  mask = (vec > q3 + 1.5 * (q3 - q1)) | (vec < q1 - 1.5 * (q3 - q1))
+  idxs = idxs[mask]
+  
+  return(idxs)
+}
+```
+
+3. Use **ggplot2** and the function from step 2 to create a density plot of *infection risk* in which outliers are plotted as a diamond symbol. Make some analysis of this graph.
+
+We can see that for the *Infection Risk* variable there are 5 outliers (if we don't take into account any possible overlapping). These outliers are responsible for the weird tails that the distribution has. If we were to ignore them, probably the kernel density estimation (KDE) would have a different shape.
+
+```{r echo=FALSE}
+library(ggplot2)
+
+# Getting the outliers indexes.
+outliers_idxs = outliers(df[, "X3"])
+Y = rep(0, length(outliers_idxs))
+X = df[outliers_idxs, "X3"]
+
+# Plotting the KDE of the vector and
+# plotting the outliers as a diamond.
+g3 = ggplot() + geom_point(aes(x=X, y=Y), shape=5, size=5, colour="red") + geom_density(aes(df$X3)) + xlab("X3")
+print(g3)
+```
+
+4. Produce graphs of the same kind as in step 3 but for all other quantitative variables in the data (aes_string() can be useful here). Put these graphs into one (hint: arrangeGrob() in gridExtra package can be used) and make some analysis.
+
+```{r echo=FALSE}
+library("grid")
+library("gridExtra")
+
+# Creating a function that will
+# allow to create this kind of 
+# plot as many times as we want.
+density_outliers = function(vec, name, bw="nrd0")
+{
+  # Getting the outliers.
+  outliers_idxs = outliers(vec)
+  Y = rep(0, length(outliers_idxs))
+  X = vec[outliers_idxs]
+  
+  # Creating the KDE and outliers plot.
+  g = ggplot() +  stat_density(aes(vec), bw=bw) + geom_point(aes(x=X, y=Y), shape=5, size=3, colour="red") + xlab(name)
+  
+  return(g)
+}
+
+# Creating a list that is going
+# to hold out every graph created
+# and that is going to be added
+# to the grid for a final plot.
+graphs = list()
+counter = 1
+
+for (name in df_names[2:length(df_names)]){
+  graphs[[counter]] = density_outliers(df[, name], name)
+  counter = counter + 1
+}
+
+grid.arrange(grobs=graphs, ncol=3)
+```
+
+5. Create a **ggplot2** scatter plot showing the dependence of *Infection risk* on the *Number of Nurses* where the points are colored by *Number of Beds*. Is there any interesting information in this plot that was not visible in the plots in step 4? What do you think is a possible danger of having such a color scale?
+
+This plot shows more information from what's econded in the plot from the step 4. In this case we can see that there is a cubic relationship between *Infection Risk* and the *Number of Nurses*. As the *Infection Risk* increases it's variance does as well, so the relationship eventhough exists is not really that clear. We can also argue that there is a limit somewhere 200 number of nurses were extra nurses wont reduce the infection risk. As for the *Number of Beds* it looks like there is a relationship with the *Number of Nurses*, since it's visible that it changes with the 'limit' found for the nurses.
+
+The danger of using such a color scale is that it is going to be affected heavily by outliers. If for example the hospital beds are around 200 +- 20 and theres a big hospital with 800 beds, the scale is going to make it look like most hospitals have the same number of beds since they are going to have a similar colour, losing visual information. Another danger about this particular scale colour, is that it's not so easy to distinguish low valued points when they are close to high valued ones, like for example in the right side of the graph.
+
+```{r echo=FALSE}
+# Constructing the plot.
+g = ggplot() + 
+  geom_point(aes(x=df$X10, y=df$X3, colour=df$X6)) +
+  geom_smooth(aes(x=df$X10, y=df$X3), 
+              method="lm", 
+              se=TRUE, 
+              colour="#8b0000", 
+              formula="y ~ poly(x, 3)") +
+  labs(x="Number of Nurses", 
+       y="Infection Risk", 
+       colour="Number of Beds")
+print(g)
+```
+
+
+6. Convert graph from step 3 to **Plotly** with *ggplotly* function. What important new functionality have you obtained compared to the graph from step 3? Make some additional analysis of the new graph.
+
+We gained the ability to hover over the density and outlier values and get the points to which they belong. We also gained the ability to zoom in and out the graph, that way we can make sure visually that there are only 5 outliers in the data.
+
+```{r echo=FALSE, message=FALSE}
+library("plotly")
+
+ggplotly(g3)
+```
+
+7. Use data plot-pipeline operator to make a histogram of *Infection Risk* in which outliers are plotted as diamond symbol. Make this plot in the **Plotly** directly (i.e. without using ggplot2 functionality). **Hint**: select(), filter(), and is.element() functions might be useful here.
+
+```{r echo=FALSE, message=FALSE}
+# Creating the plot
+p = plot_ly() %>% 
+  add_histogram(x = df[, "X3"],
+                name="Infection Risk") %>%
+  add_trace(x=X,
+            y=Y,
+            mode="markers",
+            type="scatter",
+            marker=list(symbol="diamond", size=10),
+            name="Outliers") %>%
+  layout(bargap = 0.05)
+p
+```
+
+
+8. Write a *Shiny* app that produces the same kind of plot as in step 4 but in addition include:
+- Checkboxes indicating for which variables density plots should be produced
+- A slider changing the bandwith parameter in the density estimation ('bw' paremeter).
+
+Comment how the graphs change with vaying bandwith and which bandwidth value is optimal from your point of view.
+
+The bandwidth parameter changes how smooth is going to be the kernel density estimation (KDE). The lower the value the more faithful to the data the plot is going to be but the hard to spot patterns will be. In this case, we consider that the value 0.38 is a reasonable number between smoothing and fidelity for the graph.
+
+```{r eval=FALSE}
+# TASK 8
+library(shiny)
+
+# Creating a vector for the names
+# of the variables so it's easier
+# for the user to read.
+feature_names = c("Length of Stay",
+                   "Age",
+                   "Infection Risk",
+                   "Routine Culturing Ratio",
+                   "Routine Chests X-ray Ratio",
+                   "Number of Beds",
+                   "Medical School Affiliation",
+                   "Region",
+                   "Average Daily Census",
+                   "Number of Nurses",
+                   "Avialable Facilities & Services")
+
+checkbox_list = list()
+
+for (i in 1:length(feature_names)){
+  checkbox_list[[i]] = checkboxInput(df_names[(i + 1)], feature_names[i], FALSE)
+}
+
+# Creating the UI for the shiny app.
+ui = fluidPage(
+  sliderInput(inputId="ws", label="Choose bandwidth size", value=1, min=0.1, max=1),
+  checkbox_list,
+  plotOutput("densPlot")
+)
+
+# Server side functions.
+server = function(input, output) {
+  output$densPlot <- renderPlot({
+    graphs = list()
+    counter = 1
+    for (name in df_names[2:length(df_names)]){
+      if (input[[name]] == TRUE)
+      {
+        graphs[[counter]] = density_outliers(df[, name], name, bw=input$ws)
+        counter = counter + 1 
+      }
+    }
+    if(length(graphs)>0){
+      g = grid.arrange(grobs=graphs)
+      g
+    }
+  })
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+```
+# Appendix
+```{r eval=FALSE}
+# TASK 1
+# Importing the data that we are going to use
+# and taking a look at it so that we know it 
+# was imported properly.
+df = read.table("SENIC.txt")
+head(df)
+
+# Changing the names of the columns.
+df_names = c("ID")
+
+for (i in 1:11){
+  df_names = c(df_names, c(paste("X", as.character(i), sep="")))
+}
+
+names(df) = df_names
+head(df)
+
+# TASK 2
+outliers = function(vec){
+  # Stop condition for the outliers function.
+  if (!(is.vector(vec) & is.numeric(vec))){
+    print("ERROR: Either the object is not a vector or is not numeric.")
+    stop()
+  }
+  
+  # Getting the length of the vector in
+  # order to construct the indices.
+  n = length(vec)
+  idxs = 1:n # Indices.
+  
+  
+  # Getting the quantiles of the vector
+  # to calculate outliers.
+  quantiles = quantile(vec)
+  q1 = quantiles[[2]]  # First quantile.
+  q3 = quantiles[[4]]  # Third quantile.
+  
+  # Constructing the boolean mask that
+  # is going to be used to construct the
+  # indices.
+  mask = (vec > q3 + 1.5 * (q3 - q1)) | (vec < q1 - 1.5 * (q3 - q1))
+  idxs = idxs[mask]
+  
+  return(idxs)
+}
+
+# TASK 3
+library(ggplot2)
+outliers_idxs = outliers(df[, "X3"])
+Y = rep(0, length(outliers_idxs))
+X = df[outliers_idxs, "X3"]
+
+g = ggplot() + geom_point(aes(x=X, y=Y), shape=5, size=5) + geom_density(aes(df$X3)) + xlab("X3")
+print(g)
+
+# TASK 4
+library("grid")
+library("gridExtra")
+
+density_outliers = function(vec, name, bw="nrd0")
+{
+  outliers_idxs = outliers(vec)
+  Y = rep(0, length(outliers_idxs))
+  X = vec[outliers_idxs]
+  
+  g = ggplot() +  stat_density(aes(vec), bw=bw) + geom_point(aes(x=X, y=Y), shape=5, size=3, colour="red") + xlab(name)
+  
+  return(g)
+}
+
+graphs = list()
+counter = 1
+
+for (name in df_names[2:length(df_names)]){
+  graphs[[counter]] = density_outliers(df[, name], name)
+  counter = counter + 1
+}
+
+grid.arrange(grobs=graphs, ncol=4)
+
+# TASK 5 : TODO:
+# g = ggplot(aes(x = df$X3, y = df$X10, color=df$X6))
+g = ggplot() + geom_point(aes(x=df$X3, y=df$X10), shape=1, size=3, color=df$X6)
+g
+# TASK 6
+library("plotly")
+ggplotly(g)
+
+# TASK 7
+p = plot_ly() %>% 
+  add_histogram(x = df[, "X3"]) %>%
+  add_trace(x=X, y=Y, mode="markers", type="scatter", marker=list(symbol="diamond", size=10)) %>%
+  layout(bargap = 0.05)
+p
+
+# TASK 8
+library(shiny)
+
+# Creating a vector for the names
+# of the variables so it's easier
+# for the user to read.
+feature_names = c("Length of Stay",
+                   "Age",
+                   "Infection Risk",
+                   "Routine Culturing Ratio",
+                   "Routine Chests X-ray Ratio",
+                   "Number of Beds",
+                   "Medical School Affiliation",
+                   "Region",
+                   "Average Daily Census",
+                   "Number of Nurses",
+                   "Avialable Facilities & Services")
+
+checkbox_list = list()
+
+for (i in 1:length(feature_names)){
+  checkbox_list[[i]] = checkboxInput(df_names[(i + 1)], feature_names[i], FALSE)
+}
+
+# Creating the UI for the shiny app.
+ui = fluidPage(
+  sliderInput(inputId="ws", label="Choose bandwidth size", value=1, min=0.1, max=1),
+  checkbox_list,
+  plotOutput("densPlot")
+)
+
+# Server side functions.
+server = function(input, output) {
+  output$densPlot <- renderPlot({
+    graphs = list()
+    counter = 1
+    for (name in df_names[2:length(df_names)]){
+      if (input[[name]] == TRUE)
+      {
+        graphs[[counter]] = density_outliers(df[, name], name, bw=input$ws)
+        counter = counter + 1 
+      }
+    }
+    if(length(graphs)>0){
+      g = grid.arrange(grobs=graphs)
+      g
+    }
+  })
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+```

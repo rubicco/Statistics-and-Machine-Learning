@@ -1,0 +1,562 @@
+---
+title: "Lab 02 Report"
+date: "9/19/2018"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 4
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+***
+***
+# Group 17
+* Mim Kemal Tekin (mimte666)
+* Hector Plata (hecpl268)
+***
+***
+
+# Assignment 1. Perception in Visualization
+Dataset olive.csv contains information about contents of olive oils coming from different regions in Italy. Each observation contains information about:
+
+* Region (1=North, 2=South, 3= Sardinia island)
+* Area (different Italian regions)
+Different Acids:
+* Palmitic
+* ...
+* Eicosenoic
+
+***
+
+## Task 1.1 
+
+Create scatterplot in Ggplot2 that shows dependence of Palmitic on Oleic in which observations are colored by Linolenic. Create also a similar scatter plot in which you divide Linolenic variable into fours classes and map the discretized variable to color instead.
+
+```{r echo=FALSE, out.width='100%', fig.height=4}
+library(ggplot2)
+library(grid)
+library(gridExtra)
+
+# importing data
+df_olive = read.table("olive.csv", sep=",", header=TRUE)
+## TASK 1.1
+# discretized the values to 4 groups
+linolenic_4_group = cut_interval(df_olive$linolenic, n=4)
+g_normal = ggplot() +
+  geom_point(aes(x = df_olive$palmitic, y = df_olive$oleic, color=df_olive$linolenic)) +
+  labs(x="Palmitic", y="Oleic", color="Linolenic", title="Fig1")+
+  theme(legend.position = "bottom",
+        legend.text = element_text(size=4),
+        legend.title = element_text(size=6),
+        legend.key.size = unit(0.8,"line")) 
+  
+
+g_grouped = ggplot() +
+  geom_point(aes(x = df_olive$palmitic, y = df_olive$oleic, color=linolenic_4_group), alpha=0.7) +
+  labs(x="Palmitic", y="Oleic", color="Linolenic Grouped", title="Fig2") +
+  theme(legend.position = "bottom",
+        legend.text = element_text(size=6),
+        legend.title = element_text(size=6),
+        legend.key.size = unit(0.6,"line"))
+        
+
+
+grid.arrange(grobs=list(g_normal, g_grouped), ncol=2)
+```
+
+Dividing Linolenic variable into four groups provides us to make decisions more certain, because we have only 4 colours and it is easier to realize than shades of one color. Off course when we set bounds to data that we have grouped, there is no way to know the where the observation that we look is in the range. However the graph which is colored by Linolenic data presents us a continuous range with hue, in this way we can understand where is the observation in the range. One of the disadvantages of binning the colours is that the cluster may change depending on the number of groups made.
+
+
+***
+
+## Task 1.2
+
+Create scatterplots of Palmitic vs Oleic in which you map the discretized Linolenic with four classes to:
+
+* Color 
+* Size 
+* Orientation angle
+
+```{r fig.width=9, fig.height=4.5, warning=F, fig.align='center'}
+## Task1.2
+g_size = ggplot() +
+  geom_point(aes(x = df_olive$palmitic, y = df_olive$oleic, size=(linolenic_4_group)), alpha = 0.6, shape='*') +
+  labs(x="Palmitic", y="Oleic", size="Linolenic", title="Fig3") +
+  theme(legend.position = "bottom",
+        legend.text = element_text(size=8),
+        legend.title = element_text(size=8),
+        legend.key.size = unit(0.8,"line"))
+
+
+g_angle = ggplot(df_olive, aes(x=palmitic, y=oleic)) +
+  geom_point(size=0.5, alpha=0.4) +
+  geom_spoke(aes(angle = as.numeric(linolenic_4_group), radius=55), alpha=0.6) +
+  labs(x="Palmitic", y="Oleic", color="Linolenic", title="Fig4")
+
+grid.arrange(grobs=list(g_grouped,g_size), ncol=2)
+```
+
+The graphs that separates the observations by colour and by size are fine with respect to how many information (bits) we can proccess. For the color metric, we can encode 10 levels of hue (3.1 bits) at most and we have 4 in our plot which is lower than the 6/7 levels we can differentiate at a time. The same happens for the size plot, since we can at most accurately classify 4 to 5 levels, which is again in the same range (4 levels of size in this plot). However, the graph that bins the observations by size has a perception problem which is that it overlaps between data points because there are too many observations on the same place, which makes it difficult to differriante between observations. The same problem happens with the graph that bins the data points by orientation since many of them overlap. In addition, it also is above how many levels we can percieve at a time, since there are many angles (3 bits) on the picture and varying sizes of the line (2.8 bits) which surpases the amount of bits we can encode (2.6).
+
+The easiest plot to differentiate between categories is the one that uses hue, which is consistent with the perception metrics stated above. The next one would be the second plot in which we separate categories by size, however as stated above, it's more difficult to see them due to overlaping of the observations. Finally the hardest plot for differentiating between categories is the one by orientation and line length since it goes beyond how many bits of information we can process and has the same problem as the size plot, in which observations overlaps with each other.
+
+***
+
+## Task 1.3
+
+* Create a scatterplot of Oleic vs Eicosenoic in which color is defined by numeric values of Region. 
+* Create a similar kind of plot in which Region is a categorical variable.
+
+```{r fig.width=9, fig.height=4.5, warning=F, fig.align='center'}
+
+factorized_region = factor(df_olive$Region, levels=c(1,2,3), labels=c("1","2","3"))
+
+g_region = ggplot() +
+  geom_point(aes(x = df_olive$oleic, y = df_olive$eicosenoic, color=df_olive$Region)) +
+  labs(x="Oleic", y="Eicosenoic", color="Region", title="Fig5") +
+  theme(legend.position = "bottom",
+        legend.text = element_text(size=6),
+        legend.title = element_text(size=6),
+        legend.key.size = unit(0.6,"line"))
+
+g_region_fact = ggplot() +
+  geom_point(aes(x = df_olive$oleic, y = df_olive$eicosenoic, color=factorized_region)) +
+  labs(x="Oleic", y="Eicosenoic", color="Region", title="Fig6") +
+  theme(legend.position = "bottom",
+        legend.text = element_text(size=6),
+        legend.title = element_text(size=6),
+        legend.key.size = unit(0.6,"line"))
+
+grid.arrange(grobs = list(g_region, g_region_fact), ncol=2)
+```
+
+Whats wrong about using a continious vector instead of factors for the colormap (as seen in the first plot) is that is difficult to differriante to which value (region) each observation belongs, since the scale is inside a range. Thus, using the first color map for the Region is wrong, since the variable is categorical and not continious. While if we use factors we can easily distinguish between values given on the legend. In both cases is possible to identify decision boundaries thanks to the preattentive mechanism, because the hue is part of the visual features that activates it. Thus, identifying decision boundaries in both plots is quick and easy.
+
+***
+
+## Task 1.4
+
+Create a scatterplot of Oleic vs Eicosenoic in which 
+
+* color is defined by a discretized Linoleic (3 classes) 
+* shape is defined by a discretized Palmitic (3 classes) 
+* size is defined by a discretized Palmitoleic (3 classes)
+
+```{r echo=FALSE, fig.width=9, fig.height=4.5, warning=F, fig.align='center'}
+
+linoleic_3_group = cut_interval(df_olive$linoleic, n=3)
+palmitic_3_group = cut_interval(df_olive$palmitic, n=3)
+palmitoleic_3_group = cut_interval(df_olive$palmitoleic, n=3)
+
+g_all = ggplot() +
+  geom_point(aes(x = df_olive$oleic, y = df_olive$eicosenoic, 
+                 color = linoleic_3_group, 
+                 shape = palmitic_3_group,
+                 size = palmitoleic_3_group), alpha=0.65) + 
+  labs(x="Oleic", y="Eicosenoic", color="Linoleic", shape="Palmitic", size="Palmitoleic", title="Fig7")
+
+g_all
+```
+
+This graph has 27 different type of observations because we are mixing the different metrics and channel capacities which are size, color and shape. Recognizing between the 27 types of observations is really hard, since it goes beyond our capacity to classify different levels, which is at most 10 when we combine different metrics. This graphs demonstrates the problem with perception that adding different channels doesn't increment our capacity linearly. This means that by summing over the three channels (size=2.2 bits, hue=3.1 bits and shape=2.2 bits) we should get a capacity around  7.5 bits if they added their capacities linearly, however that's not the case. Since by combining channels we can detect at most 10 different levels and we have 27 in this case.
+
+
+***
+
+## Task 1.5
+
+Create a scatterplot of Oleic vs Eicosenoic in which 
+
+* color is defined by Region
+* shape is defined by a discretized Palmitic (3 classes) 
+* size is defined by a discretized Palmitoleic (3 classes). 
+
+```{r echo=FALSE, fig.width=9, fig.height=4.5, warning=F, fig.align='center'}
+g_all_region = ggplot() +
+  geom_point(aes(x = df_olive$oleic, y = df_olive$eicosenoic, 
+                 color = df_olive$Region,
+                 shape = palmitic_3_group,
+                 size = palmitoleic_3_group),
+             alpha=0.65) +
+  labs(x="Oleic", y="Eicosenoic", color="Region", shape="Palmitic", size="Palmitoleic", title="Fig8")
+g_all_region
+```
+
+It is easy to to see a decision boundary between `Regions` despite the many aesthetics used because the `Region` variable or the target variable has a unique feature, in this case hue (which it didn't have in the previous plot). One can access the feature map representing the color blue and see if any activity is ocurring. In the case of the previous plot, instead of looking at each feature map for the target activity, we had to look at the master map of locations and see serially for the right combination of features that gives the decision boundary that separates the target.
+
+***
+
+## Task 1.6
+
+Use Plotly to create a pie chart that shows the proportions of oils coming from different Areas.
+
+* Hide label in the slices
+
+```{r echo=FALSE, fig.width=9, fig.height=4.5, warning=F, message=FALSE, fig.align='center'}
+library(plotly)
+library(dplyr)
+
+pc_areas = df_olive %>%
+  group_by(Area) %>%      #group by Area
+  summarise(sum = sum(palmitic, palmitoleic, stearic, oleic,linoleic, arachidic, eicosenoic)) %>%      # sum of all columns
+  plot_ly(labels = ~Area, values = ~sum, type = 'pie', textinfo="none") %>% #create piechart
+  layout(title = 'Fig9 | Proportions of Oils Coming From Different Areas in Italy',
+         showlegend = FALSE)
+pc_areas
+```
+
+In this type of ghraphs (pie charts), we have to compare angles to understand which slice is bigger or smaller. But in this case, we can clearly see most of slices have really close angle and they looks like they are nearly same size. Therefore, it is really hard to interpret this graph without descriptions of slices. It is not the efficient way to present this data by pie chart.
+
+***
+
+## Task 1.7
+
+Create a 2d-density contour plot with Ggplot2 in which you show dependence of Linoleic vs Eicosenoic.
+
+* Compare the graph to the scatterplot using the same variables.
+
+```{r echo=FALSE, fig.width=9, fig.height=4.5, warning=F, fig.align='center'}
+density_contour = ggplot(df_olive, aes(x=linoleic, y=eicosenoic)) +
+  geom_density_2d() +
+  labs(title= "Fig10 | 2D-Density Contour Plot", x="Linoleic", y="Eicosenoic", title="Fig10")
+
+scatt = ggplot(df_olive, aes(x=linoleic, y=eicosenoic)) +
+  geom_point() +
+  labs(title="Fig11 | Scatter Plot", x="Linoleic", y="Eicosenoic", title="Fig11")
+
+grid.arrange(grobs=list(density_contour, scatt), ncol=2)
+```
+
+Contour Plot (Fig10) can be misleading, because as we can see from the Scatter Plot (Fig11) the data has exactly separated between 4 and 10 on Y-axis. When we want to interpret from Contour Plot we can see some density between same range on Y-axis, because of the intensive entries between 0 and 4 on Y-axis. With this observation, we can say density contour plots are not the efficient way to represent data that has separated entries.
+
+***
+***
+
+# Assignment 2. Multidimensional scaling of a high-dimensional dataset.
+The data set **baseball-2016.xlsx** contains information about the scores of baseball teams in USA in 2016, such as:
+
+>Games won, Games Lost, Runs peer game, At bats, Runs, Hits, Doubles, Triples, Home runs, Runs batted in, Bases stolen, Time caught stealing, Bases on Balls, Strikeouts, Hits/At Bats, On Base Percentage, Slugging percentage, On base+Slugging, Total bases, Double plays grounded into, Times hit by pitch, Sacrifice hits, Sacrifice flies, Intentional base on balls, and Runners Left On Base.
+
+***
+
+## Task 2.1
+
+Load the file to R and answer whether it is reasonable to scale these data in order to perform a multidimensional scaling (MDS).
+
+The dataset is conformed of 30 unique baseball teams with some statistics about their runs in some leagues (NL and AL). In this case it would be reasonable to scale (MDS) or reduce the dimensionality of the vectors in order to get a more digestiable dataset, on which we can compare each team and see how close to each other they are.
+
+```{r}
+library(readxl)
+df = read_excel("baseball-2016.xlsx")
+df = as.data.frame(df)
+print("Dimensions of the dataset:")
+print(dim(df))
+```
+
+***
+
+## Task 2.2 
+
+Write an R code that performs a non-metric MDS with Minkowski distance=2 of the data (numerical columns) into two dimensions. Visualize the resulting observations in Plotly as a scatter plot in which observations are colored by League. Does it seem to exist a difference between the leagues according to the plot? Which of the MDS components seem to provide the best differentiation between the Leagues? Which baseball teams seem to be outliers?
+
+There seems to be a difference between Leagues, but it's not that clear. It's visible that most of the teams (66.6%) that belong to the AL League are on the positive axis of *V2* while the teams from the NL League are more spread across this axis. So there might be some differences between both leagues, but they are not that pronounced.
+
+The component that seems that helps more differentiate between Leagues is the *V2* as stated above.
+
+```{r echo=FALSE, message=FALSE}
+library(plotly)
+library(MASS)
+
+# Preparing only the numeric variables.
+df_numeric = scale(df[, 3:dim(df)[2]])
+
+# Doing MDS.
+d = dist(df_numeric, method="minkowski", p=2)  # Distance matrix.
+df_mds = isoMDS(d, k=2)  # Reducing the dimensions.
+df_mds = df_mds$points  # Reduced data set.
+
+# Generating the scatter plot.
+g = plot_ly(x=df_mds[, 1], 
+            y=df_mds[, 2], 
+            type="scatter", 
+            mode="markers", 
+            color=df$League, 
+            text=df$Team) %>% 
+  layout(xaxis=list(title="V1"), yaxis=list(title="V2"))
+
+suppressWarnings(g)
+```
+
+
+The teams that seem to be outliers are:
+
+- Chicago Cubs
+- Boston Red Sox
+- Colorado Rockies
+
+***
+
+## Task 2.3 
+
+Use Plotly to create a Shepard plot for the MDS performed and comment about how successful the MDS was. Which observation pairs were hard for the MDS to map successfully?
+
+It looks like the MDS performance was average, taking into account that a perfect encoding of dissimilarities would yield a 1 to 1 relationship between variables. There were a few observations that looks like outliers that were pretty difficult for the MDN algorithm to map. Below is presented some of those points that were hard for the algorithm.
+
+- Minnesota Twins vs Arizona Diamondbacks $(4.32, 5.812)$
+- Oakland Athletics vs Milwaukee Brewers $(8.11, 2.06)$
+- NY Mets vs Minnesota Twins $(6.48, 0.91)$
+
+```{r echo=FALSE}
+# coords = df_mds
+sh = Shepard(d, df_mds)
+delta = as.numeric(d)  # Dissimilarity of the whole data set.
+D = as.numeric(dist(df_mds))  # Dissimilarity of the reduced dimension data.
+
+n = nrow(df_mds)  # Number of observations.
+index = matrix(1:n, nrow=n, ncol=n)
+index1 = as.numeric(index[lower.tri(index)])
+
+index = matrix(1:n, nrow=n, ncol=n, byrow=T)
+index2 = as.numeric(index[lower.tri(index)])
+
+plot_ly() %>%
+  add_markers(x=~delta, y=~D, name="Dissimilarity",
+        text = ~paste('Obj1: ', df$Team[index1],
+                      '<br> Obj 2: ', df$Team[index2]))%>%
+  # If nonmetric MDS inolved.
+  add_lines(x=~sh$x, y=~sh$yf, name="Estimated dissimilarity")
+  
+
+```
+
+***
+
+## Task 2.4 
+
+Produce series of scatterplots in which you plot the MDS variable that was the best in the differentiation between the leagues in step 2 against all other numerical variables of the data. Pick up two scatterplots that seem to show the strongest (postivie or negative) connection between the variables and include them into your report. Find some information about these variables in Google - do they appear to be important in scoring the baseball teams? Provide some interpretation for the chosen MDS variable.
+
+The variables with the strongets correlations to the `V2` varibale are `HR` and `HR.per.game`. Both of these variables are related with the home runs made by the teams. This explains why both have almost the same correlation value and the same direction. These variables are crucial when scoring baseball teams because performing a `Home Run` is a difficult feat and teams pay players a lot of money if they can score lots of home runs. Thus, the variable `V2` might be strongly related with how skilled a team is based on the plays they make, specially in making home runs.
+
+```{r echo=FALSE}
+
+cor_1 = cor(df_mds[, 2], df[, "HR.per.game"])
+cor_2 = cor(df_mds[, 2], df[, "HR"])
+            
+ggplot() + 
+  aes(y=df_mds[, 2], x=df[, "HR.per.game"], colour=df$League) +
+  geom_point() + 
+  labs(x="HR.per.game", y="V2", colour="League") +
+  geom_smooth(method="lm", colour="grey", fill="grey") +
+  geom_text(aes(x=1.5, y=0, label=paste("r:", cor_1)), parse=TRUE)
+
+ggplot() + 
+  aes(y=df_mds[, 2], x=df[, "HR"], colour=df$League) +
+  geom_point() + 
+  labs(x="HR", y="V2", colour="League") +
+  geom_smooth(method="lm", colour="grey", fill="grey") +
+  geom_text(aes(x=240, y=0, label=paste("r:", cor_2)), parse=TRUE)
+```
+
+
+***
+***
+
+
+# Appendix
+```{r eval=FALSE}
+
+####
+## Visualization Assignment 02.1
+####
+library(ggplot2)
+library(grid)
+library(gridExtra)
+
+# importing data
+df_olive = read.table("olive.csv", sep=",", header=TRUE)
+
+
+## TASK 1.1
+# discretized the values to 4 groups
+linolenic_4_group = cut_interval(df_olive$linolenic, n=4)
+
+g_normal = ggplot() +
+  geom_point(aes(x = df_olive$palmitic, y = df_olive$oleic, color=df_olive$linolenic)) +
+  labs(x="Palmitic", y="Oleic", color="Linolenic")+
+  theme(legend.position = "bottom",
+        legend.text = element_text(size=4),
+        legend.title = element_text(size=6),
+        legend.key.size = unit(0.8,"line")) 
+
+
+g_grouped = ggplot() +
+  geom_point(aes(x = df_olive$palmitic, y = df_olive$oleic, color=linolenic_4_group)) +
+  labs(x="Palmitic", y="Oleic", color="Linolenic Grouped") +
+  theme(legend.position = "bottom",
+        legend.text = element_text(size=6),
+        legend.title = element_text(size=6),
+        legend.key.size = unit(0.6,"line"))
+
+
+grid.arrange(grobs=list(g_normal, g_grouped))
+
+## TASK 1.2
+# discretized the values to 4 groups
+linolenic_4_group = cut_interval(df_olive$linolenic, n=4)
+
+g_size = ggplot() +
+  geom_point(aes(x = df_olive$palmitic, y = df_olive$oleic, size=(linolenic_4_group)), alpha = 0.6, shape='*') +
+  labs(x="Palmitic", y="Oleic", size="Linolenic", title="Fig3") +
+  theme(legend.position = "bottom",
+        legend.text = element_text(size=8),
+        legend.title = element_text(size=8),
+        legend.key.size = unit(0.8,"line"))
+
+
+g_angle = ggplot(df_olive, aes(x=palmitic, y=oleic)) +
+  geom_point(size=0.5, alpha=0.4) +
+  geom_spoke(aes(angle = as.numeric(linolenic_4_group), radius=55), alpha=0.6) +
+  labs(x="Palmitic", y="Oleic", color="Linolenic", title="Fig4")
+
+grid.arrange(grobs=list(g_grouped,g_size), ncol=2)
+
+
+## TASK 1.3
+# factorize the numeric values to leveled values
+factorized_region = factor(df_olive$Region, levels=c(1,2,3), labels=c("1","2","3"))
+
+g_region = ggplot() +
+  geom_point(aes(x = df_olive$oleic, y = df_olive$eicosenoic, color=df_olive$Region)) +
+  labs(x="Oleic", y="Eicosenoic", color="Region") +
+  theme(legend.position = "bottom",
+        legend.text = element_text(size=6),
+        legend.title = element_text(size=6),
+        legend.key.size = unit(0.6,"line"))
+
+g_region_fact = ggplot() +
+  geom_point(aes(x = df_olive$oleic, y = df_olive$eicosenoic, color=factorized_region)) +
+  labs(x="Oleic", y="Eicosenoic", color="Region") +
+  theme(legend.position = "bottom",
+        legend.text = element_text(size=6),
+        legend.title = element_text(size=6),
+        legend.key.size = unit(0.6,"line"))
+
+grid.arrange(g_region, g_region_fact)
+
+## TASK 1.4
+# discretized the values to 3 groups
+linoleic_3_group = cut_interval(df_olive$linoleic, n=3)
+palmitic_3_group = cut_interval(df_olive$palmitic, n=3)
+palmitoleic_3_group = cut_interval(df_olive$palmitoleic, n=3)
+
+g_all = ggplot() +
+  geom_point(aes(x = df_olive$oleic, y = df_olive$eicosenoic, 
+                 color = linoleic_3_group, 
+                 shape = palmitic_3_group,
+                 size = palmitoleic_3_group)) + 
+  labs(x="Oleic", y="Eicosenoic", color="Linoleic", shape="Palmitic", size="Palmitoleic")
+
+## TASK 1.5
+g_all_region = ggplot() +
+  geom_point(aes(x = df_olive$oleic, y = df_olive$eicosenoic, 
+                 color = df_olive$Region,
+                 shape = palmitic_3_group,
+                 size = palmitoleic_3_group)) +
+  labs(x="Oleic", y="Eicosenoic", color="Region", shape="Palmitic", size="Palmitoleic")
+               
+## TASK 1.6
+library(plotly)
+library(dplyr)
+
+pc_areas = df_olive %>%
+  group_by(Area) %>%      #group by Area
+  summarise(sum = sum(palmitic, palmitoleic, stearic, oleic,linoleic, arachidic, eicosenoic)) %>%      # sum of all columns
+  plot_ly(labels = ~Area, values = ~sum, type = 'pie', textinfo="none") %>% #create piechart
+  layout(title = 'Proportions of Oils Coming From Different Areas in Italy',
+         showlegend = FALSE)
+
+#### or
+
+pie_data = df_olive %>%
+  group_by(Area) %>%      #group by Area
+  summarise(sum = sum(palmitic, palmitoleic, stearic, oleic,linoleic, arachidic, eicosenoic)) # sum of all cols
+
+pie_chart = plot_ly(labels = pie_data$Area, values = pie_data$sum, type = 'pie', textinfo="none") %>% #create piechart
+  layout(title = 'Proportions of Oils Coming From Different Areas in Italy',
+         showlegend = FALSE)
+
+
+
+## TASK 1.7
+density_contour = ggplot(df_olive, aes(x=linoleic, y=eicosenoic)) +
+  geom_density_2d() +
+  labs(title= "2D-Density Contour Plot", x="Linoleic", y="Eicosenoic")
+
+scatt = ggplot(df_olive, aes(x=linoleic, y=eicosenoic)) +
+  geom_point() +
+  labs(title="Scatter Plot", x="Linoleic", y="Eicosenoic")
+
+grid.arrange(grobs=list(density_contour, scatt), ncol=2)
+
+## TASK 2.1
+library(readxl)
+df = read_excel("baseball-2016.xlsx")
+df = as.data.frame(df)
+print("Dimensions of the dataset:")
+print(dim(df))
+
+## TASK 2.2
+library(plotly)
+library(MASS)
+
+# Preparing only the numeric variables.
+df_numeric = scale(df[, 3:dim(df)[2]])
+
+# Doing MDS.
+d = dist(df_numeric, method="minkowski", p=2)  # Distance matrix.
+df_mds = isoMDS(d, k=2)  # Reducing the dimensions.
+df_mds = df_mds$points  # Reduced data set.
+
+# Generating the scatter plot.
+g = plot_ly(x=df_mds[, 1], 
+            y=df_mds[, 2], 
+            type="scatter", 
+            mode="markers", 
+            color=df$League, 
+            text=df$Team) %>% 
+  layout(xaxis=list(title="V1"), yaxis=list(title="V2"))
+
+suppressWarnings(g)
+
+## TASK 2.3
+# coords = df_mds
+sh = Shepard(d, df_mds)
+delta = as.numeric(d)  # Dissimilarity of the whole data set.
+D = as.numeric(dist(df_mds))  # Dissimilarity of the reduced dimension data.
+
+n = nrow(df_mds)  # Number of observations.
+index = matrix(1:n, nrow=n, ncol=n)
+index1 = as.numeric(index[lower.tri(index)])
+
+index = matrix(1:n, nrow=n, ncol=n, byrow=T)
+index2 = as.numeric(index[lower.tri(index)])
+
+plot_ly()%>%
+  add_markers(x=~delta, y=~D, name="Dissimilarity",
+        text = ~paste('Obj1: ', df$Team[index1],
+                      '<br> Obj 2: ', df$Team[index2]))%>%
+  # If nonmetric MDS inolved.
+  add_lines(x=~sh$x, y=~sh$yf, name="Estimated dissimilarity")
+
+## TASK 2.4
+ggplot() + 
+  geom_point(aes(y=df_mds[, 2], x=df[, "SH"], colour=df$League)) + 
+  labs(x="SH", y="V2", colour="League")
+
+ggplot() + 
+  geom_point(aes(y=df_mds[, 2], x=df[, "IBB"], colour=df$League)) + 
+  labs(x="IBB", y="V2", colour="League")
+```
