@@ -52,7 +52,8 @@ This course covers subjects such as:
 -- Object Oriented Programming  
 -- Complete R package Developing  
 -- Code Performance  
--- HTTP requests and API usage
+-- HTTP requests and API usage  
+-- Build a package with Travis ci
 
 
 * **[Lab1](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Advanced%20R%20Programming/lab1)**: Data structures in R.
