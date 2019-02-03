@@ -65,6 +65,6 @@ This course covers subjects such as:
 
 * **[Lab5](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Advanced%20R%20Programming/lab5)**: R package which uses a Web API. It uses HTTP requests to obtain a data. This Web API provides a worldwide air pollution and this application creates a local shiny app server and its client to visualize the pollution data for the cities that application supports.
 
-![](https://raw.githubusercontent.com/rubicco/Statistics-and-Machine-Learning/master/Advanced%20R%20Programming/lab5/ss.png)
+![Sample Screenshot](https://raw.githubusercontent.com/rubicco/Statistics-and-Machine-Learning/master/Advanced%20R%20Programming/lab5/ss.png){ width=10% }
 
 * **[Lab6](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Advanced%20R%20Programming/lab6)**: R package which contains different programming strategies which are Brute Force; Dynamic Programming; Greedy Heuristic; Parallelized Brute Force for knapsack problem.
