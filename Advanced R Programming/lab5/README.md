@@ -13,3 +13,11 @@ library(shiny)
 library(MyShiny)
 runGitHub("sburanga/Adv_Progr_5")
 ```
+
+# Run on computer:
+
+```{r}
+library(MyShiny)
+My_sunShiny<-My_shiny$new()
+My_sunShiny$run()
+```
