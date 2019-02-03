@@ -1,4 +1,4 @@
-### MSc Statistics and Machine Learning - Linköping University
+## MSc Statistics and Machine Learning - Linköping University
 
 You can find lab reports and lab content of following courses in this file:  
 * Machine Learning / 2018Spring  
