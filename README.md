@@ -3,7 +3,7 @@
 You can find lab reports and lab content of following courses in this file:  
 * [Machine Learning](#user-content-732a99---machine-learning--2018spring) / 2018Spring  
 * [Visualization](#user-content-732a98---visualization--2018spring) / 2018Spring  
-* Advanced R Programming / 2018Spring  
+* [Advanced R Programming](#user-content-732a94---advanced-r-programming--2018spring) / 2018Spring  
 
 
 ### [732A99](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Machine%20Learning) - Machine Learning / 2018Spring  
@@ -25,9 +25,6 @@ This course covers:
 * **[Block2 Lab1](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Machine%20Learning/block2_lab1)**: Ensemble Methods; Mixture Models; EM Algorithm.
 
 * **[Block2 Lab2](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Machine%20Learning/block2_lab2)**: Generalized Additive Models (GAM); Generalized Linear Model (GLM); High-Dimensional Methods; Nearest Shrunken Centroid; Elastic Net; Benjamini-Hochberg Method.
-
-# asd
-
 
 ### [732A98](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Visualization) - Visualization / 2018Spring  
 The aim of the course is to learn theoretical models and modern practical tools for data visualization and visual data analysis. This course covers *gglot2*, *plotly*, *visNetwork* and *shiny* packages, also includes *static*, *interactive* and *dynamic* visualization and analysis. To see reports you can click links below and download html files which are named as report.
