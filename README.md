@@ -4,6 +4,13 @@ You can find lab reports and lab content of following courses in this file:
 * [Machine Learning](#user-content-732a99---machine-learning--2018spring) / 2018Spring  
 * [Visualization](#user-content-732a98---visualization--2018spring) / 2018Spring  
 * [Advanced R Programming](#user-content-732a94---advanced-r-programming--2018spring) / 2018Spring  
+* [Computational Statistics](#user-content-732a90---computational-statistics--2019fall) / 2019Fall  
+* [Neural Networks and Learning Systems](#user-content-732a55---neural-networks-and-learning-systems--2019fall) / 2019Fall  
+* [Advanced Data Mining](#user-content-732a75---advanced-data-mining--2019fall) / 2019Fall  
+* [Introduction to Python](#user-content-732a74---introduction-to-python--2019fall) / 2019Fall
+
+
+
 
 
 ### [732A99](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Machine%20Learning) - Machine Learning / 2018Spring  
@@ -69,3 +76,19 @@ This course covers subjects such as:
 <img src="https://raw.githubusercontent.com/rubicco/Statistics-and-Machine-Learning/master/Advanced%20R%20Programming/lab5/ss.png" width="471" height="338">
 
 * **[Lab6](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Advanced%20R%20Programming/lab6)**: R package which contains different programming strategies which are Brute Force; Dynamic Programming; Greedy Heuristic; Parallelized Brute Force for knapsack problem.
+
+### [732A90](#) - Computational Statistics / 2019Fall
+
+#### To Be Updated Soon!
+
+### [732A55](#) - Neural Networks and Learning Systems / 2019Fall
+
+#### To Be Updated Soon!
+
+### [732A75](#) - Advanced Data Mining / 2019Fall
+
+#### To Be Updated Soon!
+
+### [732A74](#) - Introduction to Python / 2019Fall
+
+#### To Be Updated Soon!
