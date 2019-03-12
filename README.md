@@ -1,8 +1,8 @@
 ## MSc Statistics and Machine Learning - Linköping University
 
 You can find lab reports and lab content of following courses in this file:  
-* Machine Learning / 2018Spring  
-* Visualization / 2018Spring  
+* [Machine Learning](#user-content-732a99---machine-learning--2018spring) / 2018Spring  
+* [Visualization](#user-content-732a98---visualization--2018spring) / 2018Spring  
 * Advanced R Programming / 2018Spring  
 
 
@@ -25,6 +25,8 @@ This course covers:
 * **[Block2 Lab1](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Machine%20Learning/block2_lab1)**: Ensemble Methods; Mixture Models; EM Algorithm.
 
 * **[Block2 Lab2](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Machine%20Learning/block2_lab2)**: Generalized Additive Models (GAM); Generalized Linear Model (GLM); High-Dimensional Methods; Nearest Shrunken Centroid; Elastic Net; Benjamini-Hochberg Method.
+
+# asd
 
 
 ### [732A98](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Visualization) - Visualization / 2018Spring  
