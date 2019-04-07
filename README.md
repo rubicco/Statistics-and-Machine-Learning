@@ -87,7 +87,20 @@ This course covers subjects such as:
 
 ### [732A75](#) - Advanced Data Mining / 2019Fall
 
-#### To Be Updated Soon!
+In this course all labs are done with Weka v3.6.12 and reports focus comparison of algorithms and choosing parameter. Additionally, Apriori, FP-grow algorithms; K-Means, K-medoids, PAM clustering, CLARA, CLARANS, BIRCH algorithms are studied and run step by step.
+
+This course covers the following content:  
+-- Clustering | Partitioning Methods: K-Means; K-Medoids; PAM; CLARA; CLARANS.  
+-- Clustering | Hierarchical Methods: AGNES; DIANA; BIRCH; ROCK; CHAMELEON.  
+-- Clustering | Density-Based Methods: DBSCAN; OPTICS; Denclue.  
+-- Association Analysis: Apriori algorithm; FP-grow Algorithm; Monotone/Antimonotone Constraints
+
+* **[Lab1](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Advanced%20Data%20Mining/lab1)**: Clustering. K-Means, different k values and "good" cluster discussions.
+
+* **[Lab2](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Advanced%20Data%20Mining/lab2)**: Association Analysis. Clustering a given dataset and using association analysis tı descrive the clusters.
+
+* **[Lab3](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Advanced%20Data%20Mining/lab3)**: Association Analysis. Importance of the distance metric within the clustering algorithm.
+
 
 ### [732A74](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Introduction%20to%20Python) - Introduction to Python / 2019Fall
 
