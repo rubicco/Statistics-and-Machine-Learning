@@ -89,6 +89,21 @@ This course covers subjects such as:
 
 #### To Be Updated Soon!
 
-### [732A74](#) - Introduction to Python / 2019Fall
+### [732A74](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Introduction%20to%20Python) - Introduction to Python / 2019Fall
 
-#### To Be Updated Soon!
+This course covers the following content:  
+-- Python basics: programming environment and documentation, program flow, variables, comments, numerical operators, loops, conditional statements.
+-- Data structures: simple data types, tuples, lists, dictionaries, sets, iterators and generators.  
+-- Functions and functional programming, anonymous lambda functions, comprehensions.  
+-- Classes and object oriented programming, objects and message passing.  
+-- The standard library, and touching upon essential third-party packages for graphics, scientific computing and data manipulation.  
+-- Debugging.  
+-- Creating Scripts.
+
+* **[Lab1](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Introduction%20to%20Python/lab1)**: Python Basics: data structures such as strings, dictionaries, and lists, write loops and comprehensions to iterate over sequential data such as lists of strings.
+
+* **[Lab2](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Introduction%20to%20Python/lab2)**: Python functions, procedural abstraction, some debugging or testing, and functional patterns. The focus is on using the basic language feature of functions, and the subdivision of problems. You will be working with functions, exceptions, assertions and various Pythonic functional constructs. You will also try out basic recursive patterns.
+
+* **[Lab3](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Introduction%20to%20Python/lab3)**: Python class and object concepts.
+
+* **[Lab3b](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Introduction%20to%20Python/lab3b_textgenerator_script)**: Python command-line script which generates text based on another text by using successors and their frequency.
