@@ -85,7 +85,7 @@ This course covers subjects such as:
 
 #### To Be Updated Soon!
 
-### [732A75](#) - Advanced Data Mining / 2019Fall
+### [732A75](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Advanced%20Data%20Mining) - Advanced Data Mining / 2019Fall
 
 In this course all labs are done with Weka v3.6.12 and reports focus comparison of algorithms and choosing parameter. Additionally, Apriori, FP-grow algorithms; K-Means, K-medoids, PAM clustering, CLARA, CLARANS, BIRCH algorithms are studied and run step by step.
 
