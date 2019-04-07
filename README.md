@@ -92,7 +92,7 @@ This course covers subjects such as:
 ### [732A74](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Introduction%20to%20Python) - Introduction to Python / 2019Fall
 
 This course covers the following content:  
--- Python basics: programming environment and documentation, program flow, variables, comments, numerical operators, loops, conditional statements.
+-- Python basics: programming environment and documentation, program flow, variables, comments, numerical operators, loops, conditional statements.  
 -- Data structures: simple data types, tuples, lists, dictionaries, sets, iterators and generators.  
 -- Functions and functional programming, anonymous lambda functions, comprehensions.  
 -- Classes and object oriented programming, objects and message passing.  
