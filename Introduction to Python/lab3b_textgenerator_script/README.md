@@ -8,7 +8,7 @@ We handle with capital letters by converting every word to lower case.
 We used dictionary and nested dictionary structures. dictionary is for storing
 count of letters and words; nested dictionary is for storing successors of word.
 
-#### Call from terminal: (outfile is optional)
+#### Call from terminal (outfile is optional):
 
 ```
 ./text_stats.py <filename> <outfile>
@@ -18,6 +18,7 @@ count of letters and words; nested dictionary is for storing successors of word.
 ```
 
 #### Use as package:
+
 --- for text_stats
 ```
 from text_stats import *
