@@ -177,6 +177,19 @@ The course has 4 modules:
 * **[Lab3](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Bayesian%20Learning/lab3)**: MCMC using Gibbs sampling and Metropolis-Hastings  
 
 
-### [732A54](#) - Big Data Analytics / 2019Spring
+### [732A54](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Big%20Data%20Analytics) - Big Data Analytics / 2019Spring
 
-#### To be updated!!!
+This course includes following topics:  
+-- Introduction to Big Data: concept and tools  
+-- Parallel computing  
+-- Databases for Big Data (NoSql, HDFS)  
+-- Querying for Big Data (Spark, SparkSQL)  
+-- Resource management in a cluster environment  
+-- Parallelizing computations for Big Data. MapReduce concept.  
+-- Machine Learning for Big Data  
+The programming language of this course is Python and database technologies are Spark and SparkSQL.
+
+* **[Lab0](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Big%20Data%20Analytics/lab0)**: Revision of relational databases (MySQL)  
+* **[Lab1](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Big%20Data%20Analytics/lab1)**: Spark  
+* **[Lab2](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Big%20Data%20Analytics/lab2)**: SparkSQL  
+* **[Lab3](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Big%20Data%20Analytics/lab3)**: Machine learning application on Spark (Forecast Prediction with Kernel Methods)

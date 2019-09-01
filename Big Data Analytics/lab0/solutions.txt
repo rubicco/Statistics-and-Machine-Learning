@@ -1,0 +1,59 @@
+1)
+select * from jbemployee;
+
+2)
+select name from jbdept order by name;
+
+3)
+select * from jbparts where qoh=0;
+
+4)
+select * from jbemployee where salary>=9000 and salary<=10000;
+
+5)
+select id, name, startyear-birthyear start_age from jbemployee;
+
+6)
+select * from jbemployee where name like "%son,%";
+
+7)
+select * from jbitem where supplier=(select id from jbsupplier where name="Fisher-Price");
+
+8)
+select t1.*, t2.name supplier_name from jbitem t1 join jbsupplier t2 on t1.supplier=t2.id where t2.name="Fisher-Price";
+
+9)
+select * from jbcity where id in (select city from jbsupplier);
+
+10)
+select name, color 
+from jbparts 
+where weight>(select weight from jbparts where name="card reader");
+
+11)
+select t1.name, t1.color from jbparts t1 join jbparts t2 where t2.name="card reader" and t1.weight>t2.weight
+
+12)
+select avg(weight) avg_weight from jbparts where color="black";
+
+13)
+select t1.supplier, t3.name, sum(t1.quan*t2.weight) total_weight from jbsupply t1 join jbparts t2 on t1.part=t2.id join jbsupplier t3 on t1.supplier=t3.id where t1.supplier in (select id from jbsupplier where city in (select id from jbcity where state="Mass")) group by supplier;
+
+
+14)
+CREATE TABLE jbcheapitem (
+    id INT,
+    name VARCHAR(20),
+    dept INT NOT NULL,
+    price INT,
+    qoh INT UNSIGNED,
+    supplier INT NOT NULL,
+    CONSTRAINT pk_item PRIMARY KEY(id));
+
+
+ALTER TABLE jbcheapitem ADD CONSTRAINT fk_cheapitem_dept FOREIGN KEY (dept) REFERENCES jbdept(id);
+ALTER TABLE jbcheapitem ADD CONSTRAINT fk_cheapitem_supplier FOREIGN KEY (supplier) REFERENCES jbsupplier(id);
+
+/*ALTER TABLE jbsale ADD CONSTRAINT fk_sale_cheapitem FOREIGN KEY (item) REFERENCES jbcheapitem(id);*/
+
+insert into jbcheapitem (select * from jbitem where price< (select avg(price) from jbitem));
