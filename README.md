@@ -34,7 +34,11 @@ This course covers:
 * **[Block2 Lab2](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Machine%20Learning/block2_lab2)**: Generalized Additive Models (GAM); Generalized Linear Model (GLM); High-Dimensional Methods; Nearest Shrunken Centroid; Elastic Net; Benjamini-Hochberg Method.
 
 ### [732A98](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Visualization) - Visualization / 2018Fall  
-The aim of the course is to learn theoretical models and modern practical tools for data visualization and visual data analysis. This course covers *gglot2*, *plotly*, *visNetwork* and *shiny* packages, also includes *static*, *interactive* and *dynamic* visualization and analysis. To see reports you can click links below and download html files which are named as report.
+The aim of the course is to learn theoretical models and modern practical tools for data visualization and visual data analysis.  
+This course covers:  
+-- *gglot2*, *plotly*, *visNetwork* and *shiny* packages  
+-- *static*, *interactive* and *dynamic* visualization and analysis.  
+To see reports you can click links below and download html files which are named as report.
 
 * **[Lab1](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Visualization/Lab1)**: Scatter plot, smoothing, histogram, shiny checkbox application.
 
@@ -159,9 +163,19 @@ This course covers the following content:
 * **[Lab3b](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Introduction%20to%20Python/lab3b_textgenerator_script)**: Python command-line script which generates text based on another text by using successors and their frequency.
 
 
-### [732A91](#) - Bayesian Learning / 2019Spring
+### [732A91](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Bayesian%20Learning) - Bayesian Learning / 2019Spring
 
-#### To be updated!!!
+The course aims to give a solid introduction to the Bayesian approach to statistical inference, with a view towards applications in data mining and machine learning. After an introduction to the subjective probability concept that underlies Bayesian inference, the course moves on to the mathematics of the prior-to-posterior updating in basic statistical models.  
+The course has 4 modules:  
+-- Bayesics: Basic concepts about likelihood, priors, (one|multi)-parameter models, marginalization.  
+-- Bayesian Regression and Classification  
+-- More advanced models, MCMC and Variational Bayes  
+-- Model Inference and Variable Selection
+
+* **[Lab1](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Bayesian%20Learning/lab1)**: Exploring posterior distributions in one-parameter models by simulation and direct numerical evaluation  
+* **[Lab2](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Bayesian%20Learning/lab2)**: Polynomial regression and classification with logistic regression  
+* **[Lab3](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Bayesian%20Learning/lab3)**: MCMC using Gibbs sampling and Metropolis-Hastings  
+
 
 ### [732A54](#) - Big Data Analytics / 2019Spring
 
