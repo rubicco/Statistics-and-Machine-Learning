@@ -77,9 +77,30 @@ This course covers subjects such as:
 
 * **[Lab6](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Advanced%20R%20Programming/lab6)**: R package which contains different programming strategies which are Brute Force; Dynamic Programming; Greedy Heuristic; Parallelized Brute Force for knapsack problem.
 
-### [732A90](#) - Computational Statistics / 2019Fall
+### [732A90](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Computational%20Statistics) - Computational Statistics / 2019Fall
 
-#### To Be Updated Soon!
+The course includes computational applications of statistics and covers as main topics:  
+-- Computer arithmetics  
+-- Optimization  
+-- Random number generation  
+-- Monte Carlo methods, MCMC  
+-- Numerical model selection and hyphothesis testing  
+-- EM algorithm and stochastic optimization (specifically genetic algorithms).  
+The programming language of the course is R and the course offers at least one application for each topic.
+
+* **[Lab1](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Computational%20Statistics/lab1)**: Some practiceses on different statistics and compter arithmetics in order to test and grasp floating points, arithmetics operations.
+
+* **[Lab2](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Computational%20Statistics/lab2)**: optimizing a model parameter by Golden-Section Search algorithm and BFGS, also discussion of comparison of these methods on the plot.
+
+* **[Lab3](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Computational%20Statistics/lab3)**: Cluster Sampling which provides sampling from a proportional set, each element does not have same probability to be drawn. And as another application of generating samples, inverse CDF method and Acceptance/rejection method to generate from different distributions.
+
+* **[Lab4](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Computational%20Statistics/lab4)**: Implementation of Metropolis-Hasting and Gibbs sampling algorithms to generate samples.
+
+* **[Lab5](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Computational%20Statistics/lab5)**: Hyphothesis testing, Jackknife, Confidence intervals by using bootstrap method.
+
+* **[Lab6](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Computational%20Statistics/lab6)**: Genetic Algorithm and EM algorithm implementations.
+
+
 
 ### [732A55](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Neural%20Networks%20and%20Learning%20Systems) - Neural Networks and Learning Systems / 2019Fall
 
@@ -98,7 +119,7 @@ Also the course have written executions of almost all methods which are included
 
 * **[Lab3](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Neural%20Networks%20and%20Learning%20Systems/lab3)** (Python, tensorflow): Application of an image recognition task on the dataset cifar10. This lab also includes some practices about kernels, manual convolution, convolution in tensorflow.
 
-* **[Lab4](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Neural%20Networks%20and%20Learning%20Systems/lab4)** (MATLAB): Reinforcement Learning with a maze solving problem in different 4 cases of maze generator. Detailed discussion on V-functions and decision of trainin hyperparameters such as discount-factor, learning-rate and exploration-factor. 
+* **[Lab4](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Neural%20Networks%20and%20Learning%20Systems/lab4)** (MATLAB): Reinforcement Learning with a maze solving problem in different 4 cases of maze generator. Detailed discussion on V-functions and decision of trainin hyperparameters such as discount-factor, learning-rate and exploration-factor.
 
 
 ### [732A75](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Advanced%20Data%20Mining) - Advanced Data Mining / 2019Fall
