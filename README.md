@@ -81,9 +81,25 @@ This course covers subjects such as:
 
 #### To Be Updated Soon!
 
-### [732A55](#) - Neural Networks and Learning Systems / 2019Fall
+### [732A55](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Neural%20Networks%20and%20Learning%20Systems) - Neural Networks and Learning Systems / 2019Fall
 
-#### To Be Updated Soon!
+The course aims to explain the differences between particular learning paradigms, selecting an appropriate method for solving a given problem and implement the method.  
+
+The course includes Supervised Learning, Unsupervised Learning and Reinforcement Learning.  
+-- Supervised Learning: neural networks, linear discriminants, support vector machines, ensemble learning, boosting, deep learning.  
+-- Unsupervised Learning: patterns in high-dimensional data, dimensionality reduction, clustering, principal component analysis, linear discriminant analysis.  
+-- Reinforcement Learning: TD-learning, Q-learning
+
+Also the course have written executions of almost all methods which are included, and some of them we have implementation.
+
+* **[Lab1](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Neural%20Networks%20and%20Learning%20Systems/lab1)** (MATLAB): Supervised Learning methods and implementation of KNN algorithm and Backpropagation algorithm. Evaluations of these algorithms on different datasets and discussion with supported by plots. Dataset4 is a digit data, so lab includes a digit recognition application with KNN algorithm and Neural Networks.
+
+* **[Lab2](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Neural%20Networks%20and%20Learning%20Systems/lab2)** (MATLAB): Face recognition model with Haar-features and AdaBoost algorithm and its evaluations.
+
+* **[Lab3](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Neural%20Networks%20and%20Learning%20Systems/lab3)** (Python, tensorflow): Application of an image recognition task on the dataset cifar10. This lab also includes some practices about kernels, manual convolution, convolution in tensorflow.
+
+* **[Lab4](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Neural%20Networks%20and%20Learning%20Systems/lab4)** (MATLAB): Reinforcement Learning with a maze solving problem in different 4 cases of maze generator. Detailed discussion on V-functions and decision of trainin hyperparameters such as discount-factor, learning-rate and exploration-factor. 
+
 
 ### [732A75](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Advanced%20Data%20Mining) - Advanced Data Mining / 2019Fall
 
