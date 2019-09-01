@@ -1,19 +1,19 @@
 ## MSc Statistics and Machine Learning - Linköping University
 
 You can find lab reports and lab content of following courses in this file:  
-* [Machine Learning](#user-content-732a99---machine-learning--2018spring) / 2018Spring  
-* [Visualization](#user-content-732a98---visualization--2018spring) / 2018Spring  
-* [Advanced R Programming](#user-content-732a94---advanced-r-programming--2018spring) / 2018Spring  
-* [Computational Statistics](#user-content-732a90---computational-statistics--2019fall) / 2019Fall  
-* [Neural Networks and Learning Systems](#user-content-732a55---neural-networks-and-learning-systems--2019fall) / 2019Fall  
-* [Advanced Data Mining](#user-content-732a75---advanced-data-mining--2019fall) / 2019Fall  
-* [Introduction to Python](#user-content-732a74---introduction-to-python--2019fall) / 2019Fall
+* [Machine Learning](#user-content-732a99---machine-learning--2018autumn) / 2018Autumn  
+* [Visualization](#user-content-732a98---visualization--2018autumn) / 2018Autumn  
+* [Advanced R Programming](#user-content-732a94---advanced-r-programming--2018autumn) / 2018Autumn  
+* [Computational Statistics](#user-content-732a90---computational-statistics--2019spring) / 2019Spring  
+* [Neural Networks and Learning Systems](#user-content-732a55---neural-networks-and-learning-systems--2019spring) / 2019Spring  
+* [Advanced Data Mining](#user-content-732a75---advanced-data-mining--2019spring) / 2019Spring  
+* [Introduction to Python](#user-content-732a74---introduction-to-python--2019spring) / 2019Spring
 
 
 
 
 
-### [732A99](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Machine%20Learning) - Machine Learning / 2018Spring  
+### [732A99](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Machine%20Learning) - Machine Learning / 2018Autumn  
 The course introduces the main concepts and tools in machine learning which are necessary for professional work and research in data analytics. The course presents machine learning mainly from a probabilistic framework, but successful non-probabilistic methods are also covered. Labs of this course is written in R.  
 This course covers:  
 -- Basic concepts in machine learning. Software. Regression, regularization and model selection.  
@@ -33,7 +33,7 @@ This course covers:
 
 * **[Block2 Lab2](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Machine%20Learning/block2_lab2)**: Generalized Additive Models (GAM); Generalized Linear Model (GLM); High-Dimensional Methods; Nearest Shrunken Centroid; Elastic Net; Benjamini-Hochberg Method.
 
-### [732A98](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Visualization) - Visualization / 2018Spring  
+### [732A98](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Visualization) - Visualization / 2018Autumn  
 The aim of the course is to learn theoretical models and modern practical tools for data visualization and visual data analysis. This course covers *gglot2*, *plotly*, *visNetwork* and *shiny* packages, also includes *static*, *interactive* and *dynamic* visualization and analysis. To see reports you can click links below and download html files which are named as report.
 
 * **[Lab1](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Visualization/Lab1)**: Scatter plot, smoothing, histogram, shiny checkbox application.
@@ -50,7 +50,7 @@ The aim of the course is to learn theoretical models and modern practical tools 
 
 
 
-### [732A94](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Advanced%20R%20Programming) - Advanced R Programming / 2018Spring
+### [732A94](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Advanced%20R%20Programming) - Advanced R Programming / 2018Autumn
 
 This course covers subjects such as:  
 -- Data structures  
@@ -77,7 +77,7 @@ This course covers subjects such as:
 
 * **[Lab6](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Advanced%20R%20Programming/lab6)**: R package which contains different programming strategies which are Brute Force; Dynamic Programming; Greedy Heuristic; Parallelized Brute Force for knapsack problem.
 
-### [732A90](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Computational%20Statistics) - Computational Statistics / 2019Fall
+### [732A90](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Computational%20Statistics) - Computational Statistics / 2019Spring
 
 The course includes computational applications of statistics and covers as main topics:  
 -- Computer arithmetics  
@@ -102,7 +102,7 @@ The programming language of the course is R and the course offers at least one a
 
 
 
-### [732A55](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Neural%20Networks%20and%20Learning%20Systems) - Neural Networks and Learning Systems / 2019Fall
+### [732A55](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Neural%20Networks%20and%20Learning%20Systems) - Neural Networks and Learning Systems / 2019Spring
 
 The course aims to explain the differences between particular learning paradigms, selecting an appropriate method for solving a given problem and implement the method.  
 
@@ -122,7 +122,7 @@ Also the course have written executions of almost all methods which are included
 * **[Lab4](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Neural%20Networks%20and%20Learning%20Systems/lab4)** (MATLAB): Reinforcement Learning with a maze solving problem in different 4 cases of maze generator. Detailed discussion on V-functions and decision of trainin hyperparameters such as discount-factor, learning-rate and exploration-factor.
 
 
-### [732A75](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Advanced%20Data%20Mining) - Advanced Data Mining / 2019Fall
+### [732A75](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Advanced%20Data%20Mining) - Advanced Data Mining / 2019Spring
 
 In this course all labs are done with Weka v3.6.12 and reports focus comparison of algorithms and choosing parameter. Additionally, Apriori, FP-grow algorithms; K-Means, K-medoids, PAM clustering, CLARA, CLARANS, BIRCH algorithms are studied and run step by step.
 
@@ -139,7 +139,7 @@ This course covers the following content:
 * **[Lab3](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Advanced%20Data%20Mining/lab3)**: Association Analysis. Importance of the distance metric within the clustering algorithm.
 
 
-### [732A74](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Introduction%20to%20Python) - Introduction to Python / 2019Fall
+### [732A74](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Introduction%20to%20Python) - Introduction to Python / 2019Spring
 
 This course covers the following content:  
 -- Python basics: programming environment and documentation, program flow, variables, comments, numerical operators, loops, conditional statements.  
