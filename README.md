@@ -10,7 +10,10 @@ You can find lab reports and lab content of following courses in this file:
 * [Introduction to Python](#user-content-732a74---introduction-to-python--2019spring) / 2019Spring  
 * [Bayesian Learning](#user-content-732a91---bayesian-learning--2019spring) / 2019Spring  
 * [Big Data Analytics](#user-content-732a54---big-data-analytics--2019spring) / 2019Spring  
-
+* [Advanced Machine Learning](#user-content-732a96---advanced-machine-learning--2019fall) / 2019Fall  
+* [Text Mining](#user-content-732a92---text-mining--2019fall) / 2019Fall  
+* [Advanced Data Models and Databases](#user-content-tddd43---advanced-data-models-and-databases--2019fall) / 2019Fall  
+* [Research Project](#user-content-732a65---research-project--2019fall) / 2019Fall
 
 
 ### [732A99](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Machine%20Learning) - Machine Learning / 2018Fall  
@@ -187,9 +190,26 @@ This course includes following topics:
 -- Resource management in a cluster environment  
 -- Parallelizing computations for Big Data. MapReduce concept.  
 -- Machine Learning for Big Data  
-The programming language of this course is Python and database technologies are Spark and SparkSQL.
+The programming language of this course is Python and database technologies are Spark and SparkSQL. The structure of the big data which is used in labs can be found index of the repository. Please click the course code.
 
 * **[Lab0](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Big%20Data%20Analytics/lab0)**: Revision of relational databases (MySQL)  
 * **[Lab1](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Big%20Data%20Analytics/lab1)**: Spark  
 * **[Lab2](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Big%20Data%20Analytics/lab2)**: SparkSQL  
 * **[Lab3](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Big%20Data%20Analytics/lab3)**: Machine learning application on Spark (Forecast Prediction with Kernel Methods)
+
+
+### [732A96](#) - Advanced Machine Learning / 2019Fall
+
+##### On going course!
+
+### [732A92](#) - Text Mining / 2019Fall
+
+##### On going course!
+
+### [TDDD43](#) - Advanced Data Models and Databases / 2019Fall
+
+##### On going course!
+
+### [732A65](#) - Research Project / 2019Fall
+
+##### On going course!
