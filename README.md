@@ -1,19 +1,19 @@
 ## MSc Statistics and Machine Learning - Linköping University
 
 You can find lab reports and lab content of following courses in this file:  
-* [Machine Learning](#user-content-732a99---machine-learning--2018autumn) / 2018Autumn  
-* [Visualization](#user-content-732a98---visualization--2018autumn) / 2018Autumn  
-* [Advanced R Programming](#user-content-732a94---advanced-r-programming--2018autumn) / 2018Autumn  
+* [Machine Learning](#user-content-732a99---machine-learning--2018fall) / 2018Fall
+* [Visualization](#user-content-732a98---visualization--2018fall) / 2018Fall
+* [Advanced R Programming](#user-content-732a94---advanced-r-programming--2018fall) / 2018Fall  
 * [Computational Statistics](#user-content-732a90---computational-statistics--2019spring) / 2019Spring  
 * [Neural Networks and Learning Systems](#user-content-732a55---neural-networks-and-learning-systems--2019spring) / 2019Spring  
 * [Advanced Data Mining](#user-content-732a75---advanced-data-mining--2019spring) / 2019Spring  
-* [Introduction to Python](#user-content-732a74---introduction-to-python--2019spring) / 2019Spring
+* [Introduction to Python](#user-content-732a74---introduction-to-python--2019spring) / 2019Spring  
+* [Bayesian Learning](#user-content-732a91---bayesian-learning--2019spring) / 2019Spring  
+* [Big Data Analytics](#user-content-732a54---big-data-analytics--2019spring) / 2019Spring  
 
 
 
-
-
-### [732A99](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Machine%20Learning) - Machine Learning / 2018Autumn  
+### [732A99](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Machine%20Learning) - Machine Learning / 2018Fall  
 The course introduces the main concepts and tools in machine learning which are necessary for professional work and research in data analytics. The course presents machine learning mainly from a probabilistic framework, but successful non-probabilistic methods are also covered. Labs of this course is written in R.  
 This course covers:  
 -- Basic concepts in machine learning. Software. Regression, regularization and model selection.  
@@ -33,7 +33,7 @@ This course covers:
 
 * **[Block2 Lab2](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Machine%20Learning/block2_lab2)**: Generalized Additive Models (GAM); Generalized Linear Model (GLM); High-Dimensional Methods; Nearest Shrunken Centroid; Elastic Net; Benjamini-Hochberg Method.
 
-### [732A98](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Visualization) - Visualization / 2018Autumn  
+### [732A98](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Visualization) - Visualization / 2018Fall  
 The aim of the course is to learn theoretical models and modern practical tools for data visualization and visual data analysis. This course covers *gglot2*, *plotly*, *visNetwork* and *shiny* packages, also includes *static*, *interactive* and *dynamic* visualization and analysis. To see reports you can click links below and download html files which are named as report.
 
 * **[Lab1](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Visualization/Lab1)**: Scatter plot, smoothing, histogram, shiny checkbox application.
@@ -50,7 +50,7 @@ The aim of the course is to learn theoretical models and modern practical tools 
 
 
 
-### [732A94](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Advanced%20R%20Programming) - Advanced R Programming / 2018Autumn
+### [732A94](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Advanced%20R%20Programming) - Advanced R Programming / 2018Fall
 
 This course covers subjects such as:  
 -- Data structures  
@@ -157,3 +157,12 @@ This course covers the following content:
 * **[Lab3](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Introduction%20to%20Python/lab3)**: Python class and object concepts.
 
 * **[Lab3b](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Introduction%20to%20Python/lab3b_textgenerator_script)**: Python command-line script which generates text based on another text by using successors and their frequency.
+
+
+### [732A91](#) - Bayesian Learning / 2019Spring
+
+#### To be updated!!!
+
+### [732A54](#) - Big Data Analytics / 2019Spring
+
+#### To be updated!!!
