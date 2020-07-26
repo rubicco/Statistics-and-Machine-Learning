@@ -206,23 +206,23 @@ On completion of the course, you should be able to:
 
 This course has 5 core contents with an assignment in each topic.
 
-* **[Lab1](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Text%20Mining)**: Information Retrieval  
+* **[Lab1](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Text%20Mining/TM-L1-information_retrieval.ipynb)**: Information Retrieval  
   * Preprocessing with `spacy`  
   * Tf-idf vectorizer from `scikit-learn`  
   * Retrieval with K-NN algorithm  
   * Keyword extraction
-* **[Lab2](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Text%20Mining)**: Document Classification  
+* **[Lab2](https://github.com/rubicco/Statistics-and-Machine-Learning/blob/master/Text%20Mining/TM-L2-text_classification.ipynb)**: Document Classification  
   * Naive Bayes Classifier implementation with `Pipeline` module from `scikit-learn`  
   * Balancing the dataset.
   * Creating Baseline and comparing different classifiers with Grid Search with Cross-Validation (`GridSearchCV` module)  
-* **[Lab3](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Text%20Mining)**: Document Clustering  
+* **[Lab3](https://github.com/rubicco/Statistics-and-Machine-Learning/blob/master/Text%20Mining/TM-L3-text_clustering_topic_modelling.ipynb)**: Document Clustering  
   * Clustering with K-means algorithm  
   * Topic modelling with Latent Dirichlet Allocation
-* **[Lab4](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Text%20Mining)**: Natural Language Processing  
+* **[Lab4](https://github.com/rubicco/Statistics-and-Machine-Learning/blob/master/Text%20Mining/TM-L4-natural_language_processing.ipynb)**: Natural Language Processing  
   * Word embeddings  
   * Analogies  
   * Simple classifiers and a multi-layer perceptron classifier comparison.
-* **[Lab5](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Text%20Mining)**: Information Extraction  
+* **[Lab5](https://github.com/rubicco/Statistics-and-Machine-Learning/blob/master/Text%20Mining/TM-L5-information_extraction.ipynb)**: Information Extraction  
   * Named entity recognition and entity linking  
   * Context-sensitive disambiguation
 
