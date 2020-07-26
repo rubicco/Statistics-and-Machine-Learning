@@ -10,10 +10,8 @@ You can find lab reports and lab content of following courses in this file:
 * [Introduction to Python](#user-content-732a74---introduction-to-python--2019spring) / 2019Spring  
 * [Bayesian Learning](#user-content-732a91---bayesian-learning--2019spring) / 2019Spring  
 * [Big Data Analytics](#user-content-732a54---big-data-analytics--2019spring) / 2019Spring  
-* [Advanced Machine Learning](#user-content-732a96---advanced-machine-learning--2019fall) / 2019Fall  
 * [Text Mining](#user-content-732a92---text-mining--2019fall) / 2019Fall  
-* [Advanced Data Models and Databases](#user-content-tddd43---advanced-data-models-and-databases--2019fall) / 2019Fall  
-* [Research Project](#user-content-732a65---research-project--2019fall) / 2019Fall
+* [Advanced Machine Learning](#user-content-732a96---advanced-machine-learning--2019fall) / 2019Fall  
 
 
 ### [732A99](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Machine%20Learning) - Machine Learning / 2018Fall  
@@ -197,19 +195,38 @@ The programming language of this course is Python and database technologies are 
 * **[Lab2](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Big%20Data%20Analytics/lab2)**: SparkSQL  
 * **[Lab3](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Big%20Data%20Analytics/lab3)**: Machine learning application on Spark (Forecast Prediction with Kernel Methods)
 
+### [732A92](#) - Text Mining / 2019Fall
+
+On completion of the course, you should be able to:  
+-- use basic methods for information extraction and retrieval of textual data  
+-- apply text processing techniques to prepare documents for statistical modelling  
+-- apply relevant machine learning models for analyzing textual data and correctly interpret the results  
+-- use machine learning models for text prediction  
+-- evaluate the performance of machine learning models for textual data
+
+This course has 5 core contents with an assignment in each topic.
+
+* **[Lab1](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Text%20Mining)**: Information Retrieval  
+  * Preprocessing with `spacy`  
+  * Tf-idf vectorizer from `scikit-learn`  
+  * Retrieval with K-NN algorithm  
+  * Keyword extraction
+* **[Lab2](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Text%20Mining)**: Document Classification  
+  * Naive Bayes Classifier implementation with `Pipeline` module from `scikit-learn`  
+  * Balancing the dataset.
+  * Creating Baseline and comparing different classifiers with Grid Search with Cross-Validation (`GridSearchCV` module)  
+* **[Lab3](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Text%20Mining)**: Document Clustering  
+  * Clustering with K-means algorithm  
+  * Topic modelling with Latent Dirichlet Allocation
+* **[Lab4](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Text%20Mining)**: Natural Language Processing  
+  * Word embeddings  
+  * Analogies  
+  * Simple classifiers and a multi-layer perceptron classifier comparison.
+* **[Lab5](https://github.com/rubicco/Statistics-and-Machine-Learning/tree/master/Text%20Mining)**: Information Extraction  
+  * Named entity recognition and entity linking  
+  * Context-sensitive disambiguation
+
 
 ### [732A96](#) - Advanced Machine Learning / 2019Fall
 
-##### On going course!
-
-### [732A92](#) - Text Mining / 2019Fall
-
-##### On going course!
-
-### [TDDD43](#) - Advanced Data Models and Databases / 2019Fall
-
-##### On going course!
-
-### [732A65](#) - Research Project / 2019Fall
-
-##### On going course!
+##### To be updated!
